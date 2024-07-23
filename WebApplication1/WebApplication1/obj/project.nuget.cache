@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R0GR9o//hPY=",
+  "dgSpecHash": "jdVC7eTBNEE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ioanis.palaskas\\source\\repos\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\webAppServer.csproj",
+  "projectFilePath": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\webAppServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ioanis.palaskas\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\ioanis.palaskas\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ioanis.palaskas\\source\\repos\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\webAppServer.csproj": {}
+    "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\webAppServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ioanis.palaskas\\source\\repos\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\webAppServer.csproj": {
+    "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\webAppServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ioanis.palaskas\\source\\repos\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\webAppServer.csproj",
+        "projectUniqueName": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\webAppServer.csproj",
         "projectName": "webAppServer",
-        "projectPath": "C:\\Users\\ioanis.palaskas\\source\\repos\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\webAppServer.csproj",
+        "projectPath": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\webAppServer.csproj",
         "packagesPath": "C:\\Users\\ioanis.palaskas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ioanis.palaskas\\source\\repos\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\obj\\",
+        "outputPath": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

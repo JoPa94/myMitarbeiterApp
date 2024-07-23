@@ -35,7 +35,6 @@ export function clearForm() {
 }
 
 export async function saveData() {
-    console.log('DatePicker configuration:', datepicker);
     // if (formObject.validate()) {
     const id = idTextBox.value;
     const vorname = vornameTextBox.value;
@@ -235,12 +234,9 @@ function createControlls() {
 async function createGrid() {
     data = await getData();
     data = data.map(x => {
-        console.log(typeof (x.geschlecht) == typeof (genders[0].Id))
         x.geburtsdatum = new Date(x.geburtsdatum)
         return x;
     });
-    console.log(data)
-    console.log(genders)
     grid = new ej.grids.Grid({
         dataSource: data,
         toolbar: ['Delete', 'Edit'],
