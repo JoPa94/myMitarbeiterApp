@@ -13,11 +13,6 @@ const genders = [
     { Id: 3, Gender: 'Anderes' },
 ];
 
-//  FormValidator
-let customFn = (args) => {
-    return args['value'].length >= 5;
-};
-
 function editRowData(rowData) {
     idTextBox.value = rowData.txt_id;
     vornameTextBox.value = rowData.vorname;
@@ -35,65 +30,61 @@ export function clearForm() {
 
 export async function saveData() {
     if (formObject.validate()) {
-    const id = idTextBox.value;
-    const vorname = vornameTextBox.value;
-    const nachname = nachnameTextBox.value;
-    const geburtsdatum = datepicker.value;
-    const geschlecht = parseInt(comboBox.value);
-    const qualifiziert = checkbox.checked;
-    const notiz = notizRte.getText();
-    data = await getData();
-    let mitarbeiter = data.find(m => m.txt_id == id);
+        const id = idTextBox.value;
+        const vorname = vornameTextBox.value;
+        const nachname = nachnameTextBox.value;
+        const geburtsdatum = datepicker.value;
+        const geschlecht = parseInt(comboBox.value);
+        const qualifiziert = checkbox.checked;
+        const notiz = notizRte.getText();
+        // data = await getData();                          //???: Just send JSON and let the Server to the work?
+        let mitarbeiter = data.find(m => m.txt_id == id);   //TODO: Delete, logic moved to server
 
-    if (mitarbeiter) {
-        mitarbeiter.vorname = vorname;
-        mitarbeiter.nachname = nachname;
-        mitarbeiter.geburtsdatum = geburtsdatum;
-        mitarbeiter.geschlecht = geschlecht;
-        mitarbeiter.qualifiziert = qualifiziert;
-        mitarbeiter.notiz = notiz;
+        if (mitarbeiter) {
+            mitarbeiter.vorname = vorname;
+            mitarbeiter.nachname = nachname;
+            mitarbeiter.geburtsdatum = geburtsdatum;
+            mitarbeiter.geschlecht = geschlecht;
+            mitarbeiter.qualifiziert = qualifiziert;
+            mitarbeiter.notiz = notiz;
 
-        try {
-            const response = await fetch(`https://localhost:7155/Mitarbeiter/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(mitarbeiter)
-            });
+            try {
+                const response = await fetch(`https://localhost:7155/Mitarbeiter/${id}`, {     //TODO: Send data to Server and let Server decide action
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(mitarbeiter)
+                });
 
-            if (!response.ok) {
-                throw new Error(`Error updating employee: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`Error updating employee: ${response.status}`);
+                }
+            } catch (error) {
+                console.log('Error updating employee:', error);
             }
+        } else {        // TODO: Problem with ID (After one POST action it takes the same id (First move logic fully to Server))
+            mitarbeiter = new Mitarbeiter(id, vorname, nachname, geburtsdatum, geschlecht, qualifiziert, notiz);    //???: Do I need this? Just send the Object/body and let the Server do it's work
+            try {
+                const response = await fetch("https://localhost:7155/Mitarbeiter", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(mitarbeiter)
+                });
 
-            const updatedEmployee = await response.json();
-            console.error('Employee updated:', updatedEmployee)
-        } catch (error) {
-            console.log('Error updating employee:', error);
-        }
-    } else {
-        mitarbeiter = new Mitarbeiter(id, vorname, nachname, geburtsdatum, geschlecht, qualifiziert, notiz);
-        console.log(mitarbeiter)
-        try {
-            const response = await fetch("https://localhost:7155/Mitarbeiter", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(mitarbeiter)
-            });
+                if (!response.ok) {
+                    throw new Error(`Error creating employee: ${response.status}`);
+                }
 
-            if (!response.ok) {
-                throw new Error(`Error creating employee: ${response.status}`);
+            } catch (error) {
+                console.error('Error creating employee:', error);
             }
-
-        } catch (error) {
-            console.error('Error creating employee:', error);
         }
-    }
-    grid.dataSource = await getData(); // Update the grid data source
-    grid.refresh();
-    clearForm();
+        grid.dataSource = await getData(); // Update the grid data source
+        grid.refresh();
+        clearForm();
     }
 }
 
@@ -108,7 +99,7 @@ export async function getData() {
     } catch (error) {
         console.error(error.message);
     }
-    return [];
+    return [];     //???: Neccessary? Why not just return nothing?
 }
 
 export async function init() {
@@ -119,7 +110,6 @@ export async function init() {
 
 async function loadLocales() {
     var calendarData, currenciesData, numberSystemData, numbersData, timeZoneNamesData;
-
     ej.base.L10n.load({
         'de': {
             'dropdowns': {
@@ -205,8 +195,6 @@ function createControlls() {
 
     // Initialize DatePicker
     datepicker = new ej.calendars.DatePicker({
-        // locale: 'de',
-        // maskPlaceholder: {day: 'd', month: 'M', year: 'y'},
         placeholder: 'Geburtsdatum',
         enableMask: true,
         format: 'dd/MM/yyyy',
@@ -240,7 +228,6 @@ async function createGrid() {
         dataSource: data,
         toolbar: ['Delete', 'Edit'],
         editSettings: { allowEditing: true, allowDeleting: true },
-        locale: 'de',
         columns: [
             { field: 'txt_id', headerText: 'ID', width: 60, type: 'number', isPrimaryKey: true, visible: false },
             { field: 'vorname', headerText: 'Vorname', width: 140, type: 'string', textAlign: 'Center', validationRules: { required: true } },
@@ -259,9 +246,9 @@ async function createGrid() {
                 headerText: 'Geschlecht',
                 width: 100,
                 textAlign: 'center',
-                foreignKeyField: 'Id',          // Das Feld, das den Fremdschlüssel enthält
-                dataSource: genders,            // Die Datenquelle
-                foreignKeyValue: 'Gender',      // Der Fremdschlüsselwert
+                foreignKeyField: 'Id',
+                dataSource: genders,
+                foreignKeyValue: 'Gender',
             },
             { headerText: 'Qualifiziert', width: 100, textAlign: 'Center', template: '#qualifiziertCheckbox' },
             { field: 'notiz', headerText: 'Notiz', width: 140, type: 'string' }
@@ -285,7 +272,6 @@ async function createGrid() {
             grid.refresh();
         }
     });
-
     let toolbar = grid.element.querySelector('.e-toolbar');
     grid.element.appendChild(toolbar);
 }
@@ -302,13 +288,7 @@ async function deleteMitarbeiter(id) {
         if (!response.ok) {
             throw new Error(`Error deleting employee: ${response.status}`);
         }
-
-        const deleteEmployee = await response.json();
-        console.log('Employee deleted:', deleteEmployee);
-
     } catch (error) {
         console.error('Error updating employee:', error);
     }
 }
-
-// document.addEventListener('DOMContentLoaded', init);

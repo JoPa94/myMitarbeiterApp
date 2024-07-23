@@ -41,15 +41,15 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Mitarbeiter> Create(Mitarbeiter mitarbeiter) // FIXME: Does't work from client, but from swagger
+        public ActionResult<Mitarbeiter> Create(Mitarbeiter mitarbeiter) // FIXME: Create logic to assign a valid ID (If Id already assigned, Update, if ID 0 create new (What to do If Id is not 0 and not already assigned? Error or Create)
         {
-            _logger.LogInformation("Create method called with data: {mitarbeiter}", mitarbeiter);
+            _logger.LogInformation("Create method called with Id: {mitarbeiter}", mitarbeiter.Txt_id);
             if (_mitarbeiterService.GetAll().Any(m => m.Txt_id == mitarbeiter.Txt_id))
             {
-                return Conflict("Mitarbeiter with this ID already exists.");
+                return Conflict("Mitarbeiter with this ID already exists.");        // TODO: WHere is this message printed?
             }
 
-            _mitarbeiterService.GetAll().Add(mitarbeiter); // FIXME?: Correct?
+            _mitarbeiterService.GetAll().Add(mitarbeiter); // ???: Correct? Does this even update the Data? I don't think so
             return CreatedAtAction(nameof(Create), new { id = mitarbeiter.Txt_id }, mitarbeiter);
         }
 
@@ -75,7 +75,7 @@ namespace WebApplication1.Controllers
         public ActionResult Delete(int id)
         {
             _logger.LogInformation("Delete method called with id: {id}", id);
-            var mitarbeiter = _mitarbeiterService.GetAll().FirstOrDefault(m => m.Txt_id == id);
+            var mitarbeiter = _mitarbeiterService.GetByID(id);
             if (mitarbeiter == null)
             {
                 return NotFound();

@@ -57,7 +57,7 @@ namespace WebApplication1.Services
                 Notiz = "Experte in der Forschung"
             }
 
-        };
+        };  // TODO: Simplyfy the new Mitarbeiter expression
 
         public List<Mitarbeiter> GetAll()
         {
