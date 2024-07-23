@@ -76,7 +76,7 @@ namespace WebApplication1.Services
 
         public bool Update(int id, Mitarbeiter mitarbeiter)
         {
-            var existingMitarbeiter = MitarbeiterListe.FirstOrDefault(m => m.Txt_id == id);
+            var existingMitarbeiter = GetByID(id);
             if (existingMitarbeiter == null)
             {
                 return false;
@@ -92,7 +92,7 @@ namespace WebApplication1.Services
 
         public bool Delete(int id)
         {
-            var mitarbeiter = MitarbeiterListe.FirstOrDefault(m => m.Txt_id == id);
+            var mitarbeiter = GetByID(id);
             if (mitarbeiter == null)
             {
                 return false;

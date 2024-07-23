@@ -34,7 +34,7 @@ export function clearForm() {
 }
 
 export async function saveData() {
-    // if (formObject.validate()) {
+    if (formObject.validate()) {
     const id = idTextBox.value;
     const vorname = vornameTextBox.value;
     const nachname = nachnameTextBox.value;
@@ -94,7 +94,7 @@ export async function saveData() {
     grid.dataSource = await getData(); // Update the grid data source
     grid.refresh();
     clearForm();
-    // }
+    }
 }
 
 export async function getData() {
