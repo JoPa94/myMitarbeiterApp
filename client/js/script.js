@@ -2,10 +2,9 @@ let selectedRecord = null;
 ej.base.enableRipple(true);
 import { Mitarbeiter } from "./mitarbeiter.js";
 
-// TODO: Jquery obj erstellen mit id vom button (.on)
 // TODO: Update and ID logic in API
-// TODO: Myjugendhilfe email as second mail in GitHub
-// TODO: push project into git (SVieth00)
+// TODO: Jquery obj erstellen mit id vom button (.on)
+
 let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, grid, data, formObject;
 
 const genders = [
@@ -98,7 +97,7 @@ export async function saveData() {
     // }
 }
 
-async function getData() {
+export async function getData() {
     const url = "https://localhost:7155/Mitarbeiter";
     try {
         const response = await fetch(url);
@@ -141,19 +140,19 @@ async function loadLocales() {
         }
     });
 
-    await new ej.base.Ajax('./js/ca-gregorian.json', 'GET', true).send().then(function (result) {
+    await new ej.base.Ajax('./json/ca-gregorian.json', 'GET', true).send().then(function (result) {
         calendarData = JSON.parse(result);
     });
-    await new ej.base.Ajax('./js/currencies.json', 'GET', true).send().then(function (result) {
+    await new ej.base.Ajax('./json/currencies.json', 'GET', true).send().then(function (result) {
         currenciesData = JSON.parse(result);
     });
-    await new ej.base.Ajax('./js/numberingSystems.json', 'GET', true).send().then(function (result) {
+    await new ej.base.Ajax('./json/numberingSystems.json', 'GET', true).send().then(function (result) {
         numberSystemData = JSON.parse(result);
     });
-    await new ej.base.Ajax('./js/numbers.json', 'GET', true).send().then(function (result) {
+    await new ej.base.Ajax('./json/numbers.json', 'GET', true).send().then(function (result) {
         numbersData = JSON.parse(result);
     });
-    await new ej.base.Ajax('./js/timeZoneNames.json', 'GET', true).send().then(function (result) {
+    await new ej.base.Ajax('./json/timeZoneNames.json', 'GET', true).send().then(function (result) {
         timeZoneNamesData = JSON.parse(result);
         ej.base.loadCldr(calendarData, currenciesData, numberSystemData, numbersData, timeZoneNamesData);
         ej.base.setCulture('de');

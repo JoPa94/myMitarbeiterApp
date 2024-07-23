@@ -34,14 +34,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-// TODO: Fragen wegen Studeneintragen
-
-/*  Make sure endpoints use DB not locale file
-    TODO: GET all mitarbeiter endpoint
-    TODO: GET mitarbeiter by ID endpoint
-    TODO: PUT mitarbeiter endpoint to update data
-    TODO: POST mitarbeiter endpoint add data
-    TODO: DELETE mitarbeiter endpoint to delete data*/
-
-// JS fetch API to test

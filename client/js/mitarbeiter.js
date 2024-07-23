@@ -1,3 +1,5 @@
+import { getData } from "./script.js";
+
 export class Mitarbeiter {
     constructor(id, vorname, nachname, geburtsdatum, geschlecht, qualifiziert, notiz) {
         this.txt_id = id == 0 ? this.generateId() : id;
@@ -10,7 +12,7 @@ export class Mitarbeiter {
     }
 
     generateId() {
-        if (data.length === 0) {
+        if (getData.length === 0) {
             return 1;
         }
         return Math.max(...data.map(m => m.txt_id)) + 1;
