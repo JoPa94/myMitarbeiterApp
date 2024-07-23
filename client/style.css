@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: #e5e5e5;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-container {
+    margin-left: auto;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.ckeckbox-control{
+    transform: scale(0.6);
+}
+
+.note-container {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 2%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.e-float-input, .e-float-input.e-control-wrapper{
+    margin-top: auto;
+    padding: 0px;
+}
+
+.e-input-group, .e-control-wrapper, .e-date-wrapper{
+    padding-left: 0px;
+    padding-right: 2.1rem;
+}
+
+.e-ddl.e-input-group .e-input-group-icon,.e-ddl.e-input-group.e-control-wrapper .e-input-group-icon:hover {
+    color: #ac2239;
+    font-size: 14px;
+}
+
+.e-input-group .e-input-group-icon:last-child, .e-input-group.e-control-wrapper .e-input-group-icon:last-child {
+    color:#ac2239;
+}
