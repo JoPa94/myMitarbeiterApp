@@ -1,7 +1,10 @@
-﻿namespace WebApplication1.Models
+﻿using WebApplication1.Services;
+
+namespace WebApplication1.Models
 {
     public class Mitarbeiter
     {
+        private readonly MitarbeiterService? _mitarbeiterService;
         public Mitarbeiter(int txt_id = 0, string? vorname = null, string? nachname = null, DateTime geburtsdatum = new DateTime(), int geschlecht = 0, bool qualifiziert = false, string? notiz = null)
         {
             Txt_id = txt_id;

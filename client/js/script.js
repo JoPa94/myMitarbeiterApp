@@ -37,19 +37,17 @@ export async function saveData() {
         const geschlecht = parseInt(comboBox.value);
         const qualifiziert = checkbox.checked;
         const notiz = notizRte.getText();
-        // data = await getData();                          //???: Just send JSON and let the Server to the work?
-        let mitarbeiter = data.find(m => m.txt_id == id);   //TODO: Delete, logic moved to server
 
-        if (mitarbeiter) {
+        let mitarbeiter = new Mitarbeiter(id, vorname, nachname, geburtsdatum, geschlecht, qualifiziert, notiz);
+        if (idTextBox.value != 0) { // Id is 0 if the employee is newly created
             mitarbeiter.vorname = vorname;
             mitarbeiter.nachname = nachname;
             mitarbeiter.geburtsdatum = geburtsdatum;
             mitarbeiter.geschlecht = geschlecht;
             mitarbeiter.qualifiziert = qualifiziert;
             mitarbeiter.notiz = notiz;
-
             try {
-                const response = await fetch(`https://localhost:7155/Mitarbeiter/${id}`, {     //TODO: Send data to Server and let Server decide action
+                const response = await fetch(`https://localhost:7155/Mitarbeiter/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -63,8 +61,7 @@ export async function saveData() {
             } catch (error) {
                 console.log('Error updating employee:', error);
             }
-        } else {        // TODO: Problem with ID (After one POST action it takes the same id (First move logic fully to Server))
-            mitarbeiter = new Mitarbeiter(id, vorname, nachname, geburtsdatum, geschlecht, qualifiziert, notiz);    //???: Do I need this? Just send the Object/body and let the Server do it's work
+        } else {
             try {
                 const response = await fetch("https://localhost:7155/Mitarbeiter", {
                     method: 'POST',

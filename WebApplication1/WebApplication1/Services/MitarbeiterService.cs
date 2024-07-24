@@ -1,4 +1,5 @@
-﻿using WebApplication1.Models;
+﻿using WebApplication1.Controllers;
+using WebApplication1.Models;
 
 namespace WebApplication1.Services
 {
@@ -63,6 +64,18 @@ namespace WebApplication1.Services
         {
             return MitarbeiterListe;
         }
+        public bool IdTaken(int id)
+        {
+            return GetAll().Any(m => m.Txt_id == id);
+        }
+
+        public int GenerateId()
+        {
+            var allMitarbeiter = GetAll();
+            if (allMitarbeiter.Count == 0) return 1;
+
+            return allMitarbeiter.Max(m => m.Txt_id) + 1;
+        }
 
         public Mitarbeiter? GetByID(int id)
         {
@@ -97,10 +110,8 @@ namespace WebApplication1.Services
             {
                 return false;
             }
-
             MitarbeiterListe.Remove(mitarbeiter);
             return true;
         }
-
     }
 }
