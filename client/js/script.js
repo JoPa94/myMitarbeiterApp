@@ -1,8 +1,6 @@
 let selectedRecord = null;
 ej.base.enableRipple(true);
 import { Mitarbeiter } from "./mitarbeiter.js";
-
-// TODO: Update and ID logic in API
 // TODO: Jquery obj erstellen mit id vom button (.on)
 
 let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, grid, data, formObject;
@@ -30,7 +28,7 @@ export function clearForm() {
 
 export async function saveData() {
     if (formObject.validate()) {
-        const id = idTextBox.value;
+        const id = idTextBox.value; //??? Remove and use in the new Mitarbeiter constructor?
         const vorname = vornameTextBox.value;
         const nachname = nachnameTextBox.value;
         const geburtsdatum = datepicker.value;
@@ -39,13 +37,7 @@ export async function saveData() {
         const notiz = notizRte.getText();
 
         let mitarbeiter = new Mitarbeiter(id, vorname, nachname, geburtsdatum, geschlecht, qualifiziert, notiz);
-        if (idTextBox.value != 0) { // Id is 0 if the employee is newly created
-            mitarbeiter.vorname = vorname;
-            mitarbeiter.nachname = nachname;
-            mitarbeiter.geburtsdatum = geburtsdatum;
-            mitarbeiter.geschlecht = geschlecht;
-            mitarbeiter.qualifiziert = qualifiziert;
-            mitarbeiter.notiz = notiz;
+        if (idTextBox.value != 0) {     // Id is 0 if the employee is newly created
             try {
                 const response = await fetch(`https://localhost:7155/Mitarbeiter/${id}`, {
                     method: 'PUT',
@@ -74,7 +66,6 @@ export async function saveData() {
                 if (!response.ok) {
                     throw new Error(`Error creating employee: ${response.status}`);
                 }
-
             } catch (error) {
                 console.error('Error creating employee:', error);
             }
@@ -94,9 +85,9 @@ export async function getData() {
         }
         return await response.json();
     } catch (error) {
-        console.error(error.message);
+        console.error('Failed to fetch data:', error.message);
     }
-    return [];     //???: Neccessary? Why not just return nothing?
+    return [];
 }
 
 export async function init() {

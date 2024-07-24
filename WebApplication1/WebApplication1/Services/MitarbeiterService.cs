@@ -5,65 +5,60 @@ namespace WebApplication1.Services
 {
     public class MitarbeiterService
     {
-        private static List<Mitarbeiter> MitarbeiterListe = new List<Mitarbeiter>
-        {
-            new Mitarbeiter
-            {
-                Txt_id = 1,
-                Vorname = "Max",
-                Nachname = "Mustermann",
-                Geburtsdatum = new DateTime(1985, 5, 14),
-                Geschlecht = 1,
-                Qualifiziert = true,
-                Notiz = "Erfahrener Mitarbeiter"
-            },
-            new Mitarbeiter
-            {
-                Txt_id = 2,
-                Vorname = "Erika",
-                Nachname = "Musterfrau",
-                Geburtsdatum = new DateTime(1990, 8, 22),
-                Geschlecht = 2,
-                Qualifiziert = false,
-                Notiz = "Neuer Mitarbeiter"
-            },
-            new Mitarbeiter
-            {
-                Txt_id = 3,
-                Vorname = "John",
-                Nachname = "Doe",
-                Geburtsdatum = new DateTime(1978, 12, 3),
-                Geschlecht = 1,
-                Qualifiziert = true,
-                Notiz = "Langjähriger Mitarbeiter"
-            },
-            new Mitarbeiter
-            {
-                Txt_id = 4,
-                Vorname = "Jane",
-                Nachname = "Smith",
-                Geburtsdatum = new DateTime(1982, 7, 30),
-                Geschlecht = 2,
-                Qualifiziert = true,
-                Notiz = "Teamleiterin"
-            },
-            new Mitarbeiter
-            {
-                Txt_id = 5,
-                Vorname = "Albert",
-                Nachname = "Einstein",
-                Geburtsdatum = new DateTime(1965, 4, 1),
-                Geschlecht = 1,
-                Qualifiziert = false,
-                Notiz = "Experte in der Forschung"
-            }
-
-        };  // TODO: Simplyfy the new Mitarbeiter expression
+        private readonly static List<Mitarbeiter> MitarbeiterListe =
+[
+    new Mitarbeiter(
+        txt_id: 1,
+        vorname: "Max",
+        nachname: "Mustermann",
+        geburtsdatum: new DateTime(1985, 5, 14),
+        geschlecht: 1,
+        qualifiziert: true,
+        notiz: "Erfahrener Mitarbeiter"
+    ),
+    new Mitarbeiter(
+        txt_id: 2,
+        vorname: "Erika",
+        nachname: "Musterfrau",
+        geburtsdatum: new DateTime(1990, 8, 22),
+        geschlecht: 2,
+        qualifiziert: false,
+        notiz: "Neuer Mitarbeiter"
+    ),
+    new Mitarbeiter(
+        txt_id: 3,
+        vorname: "John",
+        nachname: "Doe",
+        geburtsdatum: new DateTime(1978, 12, 3),
+        geschlecht: 1,
+        qualifiziert: true,
+        notiz: "Langjähriger Mitarbeiter"
+    ),
+    new Mitarbeiter(
+        txt_id: 4,
+        vorname: "Jane",
+        nachname: "Smith",
+        geburtsdatum: new DateTime(1982, 7, 30),
+        geschlecht: 2,
+        qualifiziert: true,
+        notiz: "Teamleiterin"
+    ),
+    new Mitarbeiter(
+        txt_id: 5,
+        vorname: "Albert",
+        nachname: "Einstein",
+        geburtsdatum: new DateTime(1965, 4, 1),
+        geschlecht: 1,
+        qualifiziert: false,
+        notiz: "Experte in der Forschung"
+    )
+];
 
         public List<Mitarbeiter> GetAll()
         {
             return MitarbeiterListe;
         }
+
         public bool IdTaken(int id)
         {
             return GetAll().Any(m => m.Txt_id == id);
@@ -80,11 +75,6 @@ namespace WebApplication1.Services
         public Mitarbeiter? GetByID(int id)
         {
             return MitarbeiterListe.FirstOrDefault(m => m.Txt_id == id);
-        }
-
-        public void Add(Mitarbeiter mitarbeiter)
-        {
-            MitarbeiterListe.Add(mitarbeiter);
         }
 
         public bool Update(int id, Mitarbeiter mitarbeiter)

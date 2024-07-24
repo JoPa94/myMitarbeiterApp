@@ -28,7 +28,7 @@ namespace WebApplication1.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]   // Endpoint not useable from client (Use Swagger if debugging)
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             _logger.LogInformation("GetById method called with id: {id}", id);
@@ -41,13 +41,13 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Mitarbeiter> Create(Mitarbeiter mitarbeiter)                // FIXME: Create logic to assign a valid ID (If Id already assigned, Update, if ID 0 create new (What to do If Id is not 0 and not already assigned? Error or Create)
+        public ActionResult<Mitarbeiter> Create(Mitarbeiter mitarbeiter)
         {
             _logger.LogInformation("Create method called with Id: {mitarbeiter}", mitarbeiter.Txt_id);
             if (!_mitarbeiterService.IdTaken(mitarbeiter.Txt_id))
             {
                 mitarbeiter.Txt_id = mitarbeiter.Txt_id == 0 ? _mitarbeiterService.GenerateId() : mitarbeiter.Txt_id;
-                _mitarbeiterService.GetAll().Add(mitarbeiter);                          // ???: Correct? Does this even update the Data? I don't think so
+                _mitarbeiterService.GetAll().Add(mitarbeiter);
                 return CreatedAtAction(nameof(Create), new { id = mitarbeiter.Txt_id }, mitarbeiter);
             }else
             {
@@ -59,18 +59,13 @@ namespace WebApplication1.Controllers
         public ActionResult Update(int id, Mitarbeiter mitarbeiter)
         {
             _logger.LogInformation("Update method called with id: {id}", id);
-            var existingMitarbeiter = _mitarbeiterService.GetAll().FirstOrDefault(m => m.Txt_id == id);     //FIXME
-            if (existingMitarbeiter == null)
+            bool mitarbeiterUpdated = _mitarbeiterService.Update(id, mitarbeiter);
+
+            if (mitarbeiterUpdated)
             {
-                return NotFound();
+                return NoContent();
             }
-            existingMitarbeiter.Vorname = mitarbeiter.Vorname;
-            existingMitarbeiter.Nachname = mitarbeiter.Nachname;
-            existingMitarbeiter.Geburtsdatum = mitarbeiter.Geburtsdatum;
-            existingMitarbeiter.Geschlecht = mitarbeiter.Geschlecht;
-            existingMitarbeiter.Qualifiziert = mitarbeiter.Qualifiziert;
-            existingMitarbeiter.Notiz = mitarbeiter.Notiz;
-            return NoContent();
+            return NotFound();
         }
 
         [HttpDelete("{id}")]
