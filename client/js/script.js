@@ -20,16 +20,30 @@ function editRowData(rowData) {
     notizRte.value = rowData.notiz;
 }
 
-// JQuery Klick-Eventhandler
-$("#clear").on("click", clearForm );
-$("#save").on("click", saveData );
+// JQuery Eventhandler
+// $("#clear").on("click", clearForm);
+// $("#save").on("click", saveData);
+
+// $(document).ready(function () {
+//     init();
+// });
+// TODO: Which one is better practice
+$(document).ready(function() {
+    init();
+
+    // Event listener for clear button using jQuery
+    $('#clear').on('click', clearForm);
+
+    // Event listener for save button using jQuery
+    $('#save').on('click', saveData);
+});
 
 // Button functions
-export function clearForm() {
+function clearForm() {
     $('#myForm')[0].reset();
 }
 
-export async function saveData() {
+async function saveData() {
     if (formObject.validate()) {
         const id = idTextBox.value; //??? Move down to line 39, the new Mitarbeiter constructor?
         const vorname = vornameTextBox.value;
