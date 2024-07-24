@@ -23,8 +23,6 @@ namespace WebApplication1.Controllers
         public IActionResult GetAll()
         {
             var result = _mitarbeiterService.GetAll();
-            
-            var resultString = string.Join(", ", result.Select(m => $"ID: {m.Txt_id}, Name: {m.Vorname} {m.Nachname}"));
             return Ok(result);
         }
 
@@ -32,7 +30,7 @@ namespace WebApplication1.Controllers
         public IActionResult GetById(int id)
         {
             _logger.LogInformation("GetById method called with id: {id}", id);
-            var mitarbeiter = _mitarbeiterService.GetAll().FirstOrDefault(m => m.Txt_id == id);
+            var mitarbeiter = _mitarbeiterService.GetAll().FirstOrDefault(m => m.Txt_id == id); // TODO: Remove logic, use service function
             if (mitarbeiter == null)
             {
                 return NotFound();
@@ -43,7 +41,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult<Mitarbeiter> Create(Mitarbeiter mitarbeiter)
         {
-            _logger.LogInformation("Create method called with Id: {mitarbeiter}", mitarbeiter.Txt_id);
+            _logger.LogInformation("Create method called with Id: {mitarbeiter}", mitarbeiter.Txt_id);  //TODO: check if 
             if (!_mitarbeiterService.IdTaken(mitarbeiter.Txt_id))
             {
                 mitarbeiter.Txt_id = mitarbeiter.Txt_id == 0 ? _mitarbeiterService.GenerateId() : mitarbeiter.Txt_id;
@@ -61,7 +59,7 @@ namespace WebApplication1.Controllers
             _logger.LogInformation("Update method called with id: {id}", id);
             bool mitarbeiterUpdated = _mitarbeiterService.Update(id, mitarbeiter);
 
-            if (mitarbeiterUpdated)
+            if (mitarbeiterUpdated)     // TODO: Return null/mitarbeiter 
             {
                 return NoContent();
             }

@@ -77,7 +77,7 @@ namespace WebApplication1.Services
             return MitarbeiterListe.FirstOrDefault(m => m.Txt_id == id);
         }
 
-        public bool Update(int id, Mitarbeiter mitarbeiter)
+        public bool Update(int id, Mitarbeiter mitarbeiter)     //TODO: return mitarbeiter, no bool
         {
             var existingMitarbeiter = GetByID(id);
             if (existingMitarbeiter == null)

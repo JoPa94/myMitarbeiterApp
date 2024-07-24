@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using WebApplication1.Services;
+using webAppServer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,12 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });
+
+builder.Services.AddDbContext<MyJuStartContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyJuStart"));
+});
+
 // Add services to the container.
 builder.Services.AddSingleton<MitarbeiterService>();
 builder.Services.AddControllers();

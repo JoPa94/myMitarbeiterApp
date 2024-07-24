@@ -20,23 +20,21 @@ function editRowData(rowData) {
     notizRte.value = rowData.notiz;
 }
 
-// JQuery Eventhandler
-// $("#clear").on("click", clearForm);
-// $("#save").on("click", saveData);
-
-// $(document).ready(function () {
-//     init();
-// });
-// TODO: Which one is better practice
-$(document).ready(function() {
+$(document).ready((args) => {
     init();
-
-    // Event listener for clear button using jQuery
-    $('#clear').on('click', clearForm);
-
-    // Event listener for save button using jQuery
-    $('#save').on('click', saveData);
 });
+
+ready(init)
+
+let a = function () {
+
+};
+let b = (mdjfngkj) => {
+
+}
+
+a()
+b(args)
 
 // Button functions
 function clearForm() {
@@ -45,16 +43,15 @@ function clearForm() {
 
 async function saveData() {
     if (formObject.validate()) {
-        const id = idTextBox.value; //??? Move down to line 39, the new Mitarbeiter constructor?
+        const id = idTextBox.value; //TODO Move down to line 39, the new Mitarbeiter constructor?
         const vorname = vornameTextBox.value;
         const nachname = nachnameTextBox.value;
         const geburtsdatum = datepicker.value;
         const geschlecht = parseInt(comboBox.value);
         const qualifiziert = checkbox.checked;
         const notiz = notizRte.getText();
-
         let mitarbeiter = new Mitarbeiter(id, vorname, nachname, geburtsdatum, geschlecht, qualifiziert, notiz);
-        if (idTextBox.value != 0) {     // Id is 0 if the employee is newly created
+        if (!idTextBox.value) {     // Id is 0 if the employee is newly created
             try {
                 const response = await fetch(`https://localhost:7155/Mitarbeiter/${id}`, {
                     method: 'PUT',
@@ -157,6 +154,9 @@ async function loadLocales() {
 }
 
 function createControlls() {
+    $('#clear').on('click', clearForm);
+    $('#save').on('click', saveData);
+
     let options = {
         rules: {
             'vorname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
