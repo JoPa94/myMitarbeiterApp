@@ -52,8 +52,8 @@
 			</div>
 		</form>
 		<div class="mb-4 d-flex justify-content-end">
-			<button type="reset" class="btn btn-secondary me-2" onclick="clearForm()">Verwerfen</button>
-			<button type="submit" class="btn btn-primary" onclick="saveData()">Speichern</button>
+			<button type="reset" id="clear" class="btn btn-secondary me-2">Verwerfen</button>
+			<button type="submit" id="save" class="btn btn-primary">Speichern</button>
 		</div>
 
 		<script id="qualifiziertCheckbox" type="text/x-template">
@@ -69,13 +69,10 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 	<script type="module">
-		import { init, saveData, clearForm } from './js/script.js';
+		import { init} from './js/script.js';
 		document.addEventListener('DOMContentLoaded', () => {
 			init();
 		});
-		// export function into global context
-		window.saveData = saveData;
-		window.clearForm = clearForm;
 	</script>
 </body>
 

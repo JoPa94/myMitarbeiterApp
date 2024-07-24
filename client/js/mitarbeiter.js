@@ -1,5 +1,3 @@
-import { getData } from "./script.js";
-
 export class Mitarbeiter {
     constructor(id, vorname, nachname, geburtsdatum, geschlecht, qualifiziert, notiz) {
         this.txt_id = id;

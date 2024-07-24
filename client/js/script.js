@@ -1,9 +1,8 @@
-let selectedRecord = null;
-ej.base.enableRipple(true);
 import { Mitarbeiter } from "./mitarbeiter.js";
-// TODO: Jquery obj erstellen mit id vom button (.on)
+ej.base.enableRipple(true);
 
 let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, grid, data, formObject;
+let selectedRecord = null;
 
 const genders = [
     { Id: 1, Gender: 'Männlich' },
@@ -21,14 +20,18 @@ function editRowData(rowData) {
     notizRte.value = rowData.notiz;
 }
 
+// JQuery Klick-Eventhandler
+$("#clear").on("click", clearForm );
+$("#save").on("click", saveData );
+
 // Button functions
 export function clearForm() {
-    document.getElementById('myForm').reset();
+    $('#myForm')[0].reset();
 }
 
 export async function saveData() {
     if (formObject.validate()) {
-        const id = idTextBox.value; //??? Remove and use in the new Mitarbeiter constructor?
+        const id = idTextBox.value; //??? Move down to line 39, the new Mitarbeiter constructor?
         const vorname = vornameTextBox.value;
         const nachname = nachnameTextBox.value;
         const geburtsdatum = datepicker.value;
