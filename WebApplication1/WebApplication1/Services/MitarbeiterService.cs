@@ -40,10 +40,11 @@ namespace WebApplication1.Services
             return await _context.Mitarbeiter.FindAsync(id);
         }
 
-        //public bool IdTaken(int id)
-        //{
-        //    return GetAll().Any(m => m.Id == id);
-        //}
+        public async Task Create(Mitarbeiter mitarbeiter)
+        {
+            await _context.Mitarbeiter.AddAsync(mitarbeiter);
+            await _context.SaveChangesAsync();
+        }
 
         //public int GenerateId()
         //{

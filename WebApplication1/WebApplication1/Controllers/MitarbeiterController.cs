@@ -32,34 +32,32 @@ namespace WebApplication1.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
+                throw;  // Will ich throwen?
             }
         }
         [HttpGet("{id}")]
         public async Task<IActionResult>GetById(int id)
         {
-            _logger.LogInformation("GetById method called with id: {id}", id);
-            var mitarbeiter = await _mitarbeiterService.GetByID(id);
-            if (mitarbeiter == null)
+            try
             {
-                return NotFound();
+                _logger.LogInformation("GetById method called with id: {id}", id);
+                var mitarbeiter = await _mitarbeiterService.GetByID(id);
+                if(mitarbeiter == null) return NotFound();
+                return Ok(mitarbeiter);
             }
-            return Ok(mitarbeiter);
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        //[HttpPost]
-        //public ActionResult<Mitarbeiter> Create(Mitarbeiter mitarbeiter)
-        //{
-        //    _logger.LogInformation("Create method called with Id: {mitarbeiter}", mitarbeiter.Id);  //TODO: check if 
-        //    if (!_mitarbeiterService.IdTaken(mitarbeiter.Id))
-        //    {
-        //        mitarbeiter.Id = mitarbeiter.Id == 0 ? _mitarbeiterService.GenerateId() : mitarbeiter.Id;
-        //        _mitarbeiterService.GetAll().Add(mitarbeiter);
-        //        return CreatedAtAction(nameof(Create), new { id = mitarbeiter.Id }, mitarbeiter);
-        //    }else
-        //    {
-        //        return Conflict("Mitarbeiter with this ID already exists.");
-        //    }
-        //}
+        [HttpPost]
+        public void Create(Mitarbeiter mitarbeiter)
+        {
+            _logger.LogInformation("Create method called with Id: {mitarbeiter}", mitarbeiter.Id);
+            _mitarbeiterService.Create(mitarbeiter);
+
+        }       //TODO: SWagger works, but client not!
 
         //[HttpPut("{id}")]
         //public ActionResult Update(int id, Mitarbeiter mitarbeiter)
