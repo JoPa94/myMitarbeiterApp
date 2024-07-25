@@ -18,7 +18,7 @@ builder.Services.AddDbContext<MyJuStartContext>(options =>
 });
 
 // Add services to the container.
-builder.Services.AddSingleton<MitarbeiterService>();
+builder.Services.AddScoped<MitarbeiterService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -42,3 +42,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//??? Singelton vs Scoped 
