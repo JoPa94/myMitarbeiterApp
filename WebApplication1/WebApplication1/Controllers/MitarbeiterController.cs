@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using WebApplication1.Models;
 using WebApplication1.Services;
+using webAppServer.Data;
 
 namespace WebApplication1.Controllers
 {
@@ -12,25 +14,35 @@ namespace WebApplication1.Controllers
     {
         private readonly MitarbeiterService _mitarbeiterService;
         private readonly ILogger<MitarbeiterController> _logger;
+        private readonly MyJuStartContext _context;
 
-        public MitarbeiterController(MitarbeiterService mitarbeiterService, ILogger<MitarbeiterController> logger)
+        public MitarbeiterController(MitarbeiterService mitarbeiterService, ILogger<MitarbeiterController> logger, MyJuStartContext context)
         {
             _mitarbeiterService = mitarbeiterService;
             _logger = logger;
+            _context = context;
         }
 
+        //[HttpGet]
+        //public IActionResult GetAll()
+        //{
+        //    var result = _mitarbeiterService.GetAll();
+        //    return Ok(result);
+        //}
+
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<ActionResult<IEnumerable<Mitarbeiter>>> GetAll()
         {
-            var result = _mitarbeiterService.GetAll();
-            return Ok(result);
+            _logger.LogInformation("GetAll method called");
+            var mitarbeiterList = await _context.Mitarbeiter.ToListAsync();
+            return Ok(mitarbeiterList);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             _logger.LogInformation("GetById method called with id: {id}", id);
-            var mitarbeiter = _mitarbeiterService.GetAll().FirstOrDefault(m => m.Txt_id == id); // TODO: Remove logic, use service function
+            var mitarbeiter = _mitarbeiterService.GetAll().FirstOrDefault(m => m.Id == id); // TODO: Remove logic, use service function
             if (mitarbeiter == null)
             {
                 return NotFound();
@@ -41,12 +53,12 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult<Mitarbeiter> Create(Mitarbeiter mitarbeiter)
         {
-            _logger.LogInformation("Create method called with Id: {mitarbeiter}", mitarbeiter.Txt_id);  //TODO: check if 
-            if (!_mitarbeiterService.IdTaken(mitarbeiter.Txt_id))
+            _logger.LogInformation("Create method called with Id: {mitarbeiter}", mitarbeiter.Id);  //TODO: check if 
+            if (!_mitarbeiterService.IdTaken(mitarbeiter.Id))
             {
-                mitarbeiter.Txt_id = mitarbeiter.Txt_id == 0 ? _mitarbeiterService.GenerateId() : mitarbeiter.Txt_id;
+                mitarbeiter.Id = mitarbeiter.Id == 0 ? _mitarbeiterService.GenerateId() : mitarbeiter.Id;
                 _mitarbeiterService.GetAll().Add(mitarbeiter);
-                return CreatedAtAction(nameof(Create), new { id = mitarbeiter.Txt_id }, mitarbeiter);
+                return CreatedAtAction(nameof(Create), new { id = mitarbeiter.Id }, mitarbeiter);
             }else
             {
                 return Conflict("Mitarbeiter with this ID already exists.");

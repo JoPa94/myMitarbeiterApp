@@ -1,67 +1,75 @@
-﻿using WebApplication1.Controllers;
+﻿using System.Data;
+using WebApplication1.Controllers;
 using WebApplication1.Models;
+using webAppServer.Data;
 
 namespace WebApplication1.Services
 {
     public class MitarbeiterService
     {
+
         private readonly static List<Mitarbeiter> MitarbeiterListe =
 [
     new Mitarbeiter(
-        txt_id: 1,
-        vorname: "Max",
-        nachname: "Mustermann",
+        1,
+        vorname: "x",
+        nachname: "x",
         geburtsdatum: new DateTime(1985, 5, 14),
         geschlecht: 1,
         qualifiziert: true,
-        notiz: "Erfahrener Mitarbeiter"
+        notiz: "x"
     ),
     new Mitarbeiter(
-        txt_id: 2,
-        vorname: "Erika",
-        nachname: "Musterfrau",
+        2,
+        vorname: "x",
+        nachname: "x",
         geburtsdatum: new DateTime(1990, 8, 22),
         geschlecht: 2,
         qualifiziert: false,
-        notiz: "Neuer Mitarbeiter"
+        notiz: "x"
     ),
     new Mitarbeiter(
-        txt_id: 3,
-        vorname: "John",
-        nachname: "Doe",
+        3,
+        vorname: "x",
+        nachname: "x",
         geburtsdatum: new DateTime(1978, 12, 3),
         geschlecht: 1,
         qualifiziert: true,
-        notiz: "Langjähriger Mitarbeiter"
+        notiz: "x"
     ),
     new Mitarbeiter(
-        txt_id: 4,
-        vorname: "Jane",
-        nachname: "Smith",
+        4,
+        vorname: "x",
+        nachname: "x",
         geburtsdatum: new DateTime(1982, 7, 30),
         geschlecht: 2,
         qualifiziert: true,
-        notiz: "Teamleiterin"
+        notiz: "x"
     ),
     new Mitarbeiter(
-        txt_id: 5,
-        vorname: "Albert",
-        nachname: "Einstein",
+        5,
+        vorname: "x",
+        nachname: "x",
         geburtsdatum: new DateTime(1965, 4, 1),
         geschlecht: 1,
         qualifiziert: false,
-        notiz: "Experte in der Forschung"
+        notiz: "x"
     )
 ];
 
         public List<Mitarbeiter> GetAll()
         {
-            return MitarbeiterListe;
+                return MitarbeiterListe;
         }
+
+        //public List<Mitarbeiter> GetAllSQL()
+        //{
+        //    return _context.Mitarbeiter.ToList();
+        //}
 
         public bool IdTaken(int id)
         {
-            return GetAll().Any(m => m.Txt_id == id);
+            return GetAll().Any(m => m.Id == id);
         }
 
         public int GenerateId()
@@ -69,12 +77,12 @@ namespace WebApplication1.Services
             var allMitarbeiter = GetAll();
             if (allMitarbeiter.Count == 0) return 1;
 
-            return allMitarbeiter.Max(m => m.Txt_id) + 1;
+            return allMitarbeiter.Max(m => m.Id) + 1;
         }
 
         public Mitarbeiter? GetByID(int id)
         {
-            return MitarbeiterListe.FirstOrDefault(m => m.Txt_id == id);
+            return MitarbeiterListe.FirstOrDefault(m => m.Id == id);
         }
 
         public bool Update(int id, Mitarbeiter mitarbeiter)     //TODO: return mitarbeiter, no bool

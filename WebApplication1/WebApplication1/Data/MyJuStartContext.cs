@@ -5,11 +5,10 @@ namespace webAppServer.Data
 {
     public class MyJuStartContext : DbContext
     {
-        public DbSet<Mitarbeiter> Miterbeiter { get; set; }
+        public DbSet<Mitarbeiter> Mitarbeiter { get; set; }
 
         public MyJuStartContext(DbContextOptions<MyJuStartContext> options) : base(options) 
         { 
-
         }
     }
 }
