@@ -38,17 +38,14 @@ namespace WebApplication1.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult>GetById(int id)
         {
-            try
+            _logger.LogInformation("GetById method called with id: {id}", id);
+            var mitarbeiter = await _mitarbeiterService.GetByID(id);
+
+            if (mitarbeiter == null)
             {
-                _logger.LogInformation("GetById method called with id: {id}", id);
-                var mitarbeiter = await _mitarbeiterService.GetByID(id);
-                if(mitarbeiter == null) return NotFound();
-                return Ok(mitarbeiter);
+                return NotFound();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return Ok(mitarbeiter);
         }
 
         [HttpPost]
@@ -59,8 +56,7 @@ namespace WebApplication1.Controllers
             {
                 await _mitarbeiterService.Create(mitarbeiter);
                 return CreatedAtAction(nameof(GetById), new { id = mitarbeiter.Id }, mitarbeiter);
-                //???return Ok(); or return(mitarbeiter) instead ?
-                //??? Is try-catch logci and belogs to the service?
+                //??? return Ok(); or return(mitarbeiter) instead ?
             }
             catch (Exception)
             {
@@ -68,24 +64,26 @@ namespace WebApplication1.Controllers
             }
         }
 
-        //[HttpPut("{id}")]
-        //public ActionResult Update(int id, Mitarbeiter mitarbeiter)
-        //{
-        //    _logger.LogInformation("Update method called with id: {id}", id);
-        //    bool mitarbeiterUpdated = _mitarbeiterService.Update(id, mitarbeiter);
+        [HttpPut]
+        public async Task<ActionResult> Update(Mitarbeiter mitarbeiter)
+        {
+            _logger.LogInformation("Update method called with id: {id}", mitarbeiter.Id);
+            var mitarbeiterUpdated = await _mitarbeiterService.Update(mitarbeiter);
 
-        //    if (mitarbeiterUpdated)     // TODO: Return null/mitarbeiter 
-        //    {
-        //        return NoContent();
-        //    }
-        //    return NotFound();
-        //}
+            if (mitarbeiterUpdated != null)
+            {
+                Console.WriteLine($"Mitarbeiter: {mitarbeiter.Id}, {mitarbeiter.Vorname}, {mitarbeiter.Nachname} angelegt");
+                return NoContent();
+            }
+            return NotFound();
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             _logger.LogInformation($"Delete method called with ID: {id}");
-            if (await _mitarbeiterService.Delete(id) > 0)   //??? Is this okay? (Logic to service?)
+            if (await _mitarbeiterService.Delete(id) > 0)
             {
                 return Ok(new {title = "Success", status = 200, message = $"Mitarbeiter with ID: {id} successfully deleted." });
             }

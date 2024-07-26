@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using WebApplication1.Controllers;
 using WebApplication1.Models;
 using webAppServer.Data;
@@ -17,7 +19,6 @@ namespace WebApplication1.Services
         {
             _context = context;
         }
-
         public async Task<List<Mitarbeiter>?> GetAll()
         {
             return await _context.Mitarbeiter.ToListAsync();
@@ -30,47 +31,50 @@ namespace WebApplication1.Services
 
         public async Task Create(Mitarbeiter mitarbeiter)
         {
-            await _context.Mitarbeiter.AddAsync(mitarbeiter);
+            _context.Mitarbeiter.Add(mitarbeiter);
             await _context.SaveChangesAsync();
         }
 
-        //public int GenerateId()
-        //{
-        //    var allMitarbeiter = GetAll();
-        //    if (allMitarbeiter.Count == 0) return 1;
-
-        //    return allMitarbeiter.Max(m => m.Id) + 1;
-        //}
-
-
-
-        //public bool Update(int id, Mitarbeiter mitarbeiter)     //TODO: return mitarbeiter, no bool
-        //{
-        //    var existingMitarbeiter = GetByID(id);
-        //    if (existingMitarbeiter == null)
-        //    {
-        //        return false;
-        //    }
-        //    existingMitarbeiter.Vorname = mitarbeiter.Vorname;
-        //    existingMitarbeiter.Nachname = mitarbeiter.Nachname;
-        //    existingMitarbeiter.Geburtsdatum = mitarbeiter.Geburtsdatum;
-        //    existingMitarbeiter.Geschlecht = mitarbeiter.Geschlecht;
-        //    existingMitarbeiter.Qualifiziert = mitarbeiter.Qualifiziert;
-        //    existingMitarbeiter.Notiz = mitarbeiter.Notiz;
-        //    return true;
-        //}
-
-        public async Task<int> Delete(int id)
+        public async Task<Mitarbeiter?> Update(Mitarbeiter mitarbeiter)     //TODO: return mitarbeiter, no bool
         {
             try
             {
-                _context.Mitarbeiter.Remove(new Mitarbeiter { Id = id });
-                return await _context.SaveChangesAsync();
+                if (mitarbeiter.Id == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    _context.Mitarbeiter.Update(mitarbeiter);
+                    await _context.SaveChangesAsync();
+                    return mitarbeiter;
+                }
             }
             catch (Exception)
             {
-                return -1;
+                return null;
             }
         }
+            //    if (_context.Mitarbeiter.Find(mitarbeiter.Id) != null)
+            //    {
+            //        _context.Mitarbeiter.Update(mitarbeiter);
+            //        await _context.SaveChangesAsync();
+            //        return true;
+            //    }
+            //    return false;
+            //}
+
+            public async Task<int> Delete(int id)
+            {
+                try
+                {
+                    _context.Mitarbeiter.Remove(new Mitarbeiter { Id = id });
+                    return await _context.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    return -1;
+                }
+            }
     }
 }

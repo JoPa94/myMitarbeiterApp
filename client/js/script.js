@@ -29,7 +29,7 @@ function clearForm() {
     $('#myForm')[0].reset();
 }
 
-async function saveData() {
+async function saveData() {     //??? If id is 0 the new mitarbeier will be created, could just use put and remove CREATE
     if (formObject.validate()) {
         let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
         console.log(mitarbeiter.id)
