@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\webapplication1\\controllers\\mitarbeitercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|solutionrelative:webapplication1\\controllers\\mitarbeitercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\webapplication1\\services\\mitarbeiterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|solutionrelative:webapplication1\\services\\mitarbeiterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\webapplication1\\models\\mitarbeiter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|solutionrelative:webapplication1\\models\\mitarbeiter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\webapplication1\\controllers\\mitarbeitercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|solutionrelative:webapplication1\\controllers\\mitarbeitercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,43 +22,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 307,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Mitarbeiter.cs",
               "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Models\\Mitarbeiter.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Models\\Mitarbeiter.cs",
               "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Models\\Mitarbeiter.cs",
               "RelativeToolTip": "WebApplication1\\Models\\Mitarbeiter.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAFAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-26T09:00:40.993Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "MitarbeiterController.cs",
               "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Controllers\\MitarbeiterController.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Controllers\\MitarbeiterController.cs",
               "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Controllers\\MitarbeiterController.cs",
               "RelativeToolTip": "WebApplication1\\Controllers\\MitarbeiterController.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAqwCQAAAAAAAAA",
+              "ViewState": "AQIAADUAAAAAAAAAAAAgwFEAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-18T12:19:55.16Z",
               "EditorCaption": ""
-            },
+            }
+          ]
+        },
+        {
+          "DockedWidth": 307,
+          "SelectedChildIndex": 0,
+          "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MitarbeiterService.cs",
               "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Services\\MitarbeiterService.cs",
               "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs",
               "RelativeToolTip": "WebApplication1\\Services\\MitarbeiterService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "ViewState": "AQIAADEAAAAAAAAAAAAuwBYAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-18T12:17:09.013Z",
               "EditorCaption": ""

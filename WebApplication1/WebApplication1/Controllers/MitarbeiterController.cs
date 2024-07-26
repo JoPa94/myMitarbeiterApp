@@ -60,12 +60,12 @@ namespace WebApplication1.Controllers
                 await _mitarbeiterService.Create(mitarbeiter);
                 return CreatedAtAction(nameof(GetById), new { id = mitarbeiter.Id }, mitarbeiter);
                 //???return Ok(); or return(mitarbeiter) instead ?
+                //??? Is try-catch logci and belogs to the service?
             }
             catch (Exception)
             {
                 return BadRequest(new {title = "Bad Request", status = 400, message = $"Error occurred while creating Mitarbeiter with ID: {mitarbeiter.Id}."});
             }
-
         }
 
         //[HttpPut("{id}")]
@@ -85,8 +85,7 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             _logger.LogInformation($"Delete method called with ID: {id}");
-            int deleted = await _mitarbeiterService.Delete(id);
-            if (deleted > 0)
+            if (await _mitarbeiterService.Delete(id) > 0)   //??? Is this okay? (Logic to service?)
             {
                 return Ok(new {title = "Success", status = 200, message = $"Mitarbeiter with ID: {id} successfully deleted." });
             }

@@ -20,14 +20,8 @@ namespace WebApplication1.Services
 
         public async Task<List<Mitarbeiter>?> GetAll()
         {
-            try
-            {
-                return await _context.Mitarbeiter.ToListAsync();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return await _context.Mitarbeiter.ToListAsync();
+
         }
         public async Task<Mitarbeiter?> GetByID(int id)
         {
