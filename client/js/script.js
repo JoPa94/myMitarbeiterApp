@@ -11,7 +11,7 @@ const genders = [
 ];
 
 function editRowData(rowData) {
-    idTextBox.value = rowData.txt_id;
+    idTextBox.value = rowData.id;
     vornameTextBox.value = rowData.vorname;
     nachnameTextBox.value = rowData.nachname;
     datepicker.value = new Date(rowData.geburtsdatum);
@@ -23,18 +23,6 @@ function editRowData(rowData) {
 $(document).ready((args) => {
     init();
 });
-
-ready(init)
-
-let a = function () {
-
-};
-let b = (mdjfngkj) => {
-
-}
-
-a()
-b(args)
 
 // Button functions
 function clearForm() {
@@ -65,7 +53,7 @@ async function saveData() {
                     throw new Error(`Error updating employee: ${response.status}`);
                 }
             } catch (error) {
-                console.log('Error updating employee:', error);
+                console.error('Error updating employee:', error);
             }
         } else {
             try {
@@ -150,7 +138,6 @@ async function loadLocales() {
         ej.base.setCulture('de');
         ej.base.setCurrencyCode('EUR');
     });
-
 }
 
 function createControlls() {
@@ -172,7 +159,7 @@ function createControlls() {
         placeholder: 'id',
         floatLabelType: 'Auto',
     });
-    idTextBox.appendTo('#txt_id');
+    idTextBox.appendTo('#id');
 
     vornameTextBox = new ej.inputs.TextBox({
         placeholder: 'Vorname',
@@ -234,7 +221,7 @@ async function createGrid() {
         toolbar: ['Delete', 'Edit'],
         editSettings: { allowEditing: true, allowDeleting: true },
         columns: [
-            { field: 'txt_id', headerText: 'ID', width: 60, type: 'number', isPrimaryKey: true, visible: false },
+            { field: 'id', headerText: 'ID', width: 60, type: 'number', isPrimaryKey: true, visible: true },
             { field: 'vorname', headerText: 'Vorname', width: 140, type: 'string', textAlign: 'Center', validationRules: { required: true } },
             { field: 'nachname', headerText: 'Nachname', width: 140, type: 'string', textAlign: 'Center', validationRules: { required: true } },
             {
@@ -273,7 +260,7 @@ async function createGrid() {
 
         if (args.requestType === 'delete') {
             selectedRecord = args.data[0];
-            await deleteMitarbeiter(selectedRecord.txt_id);
+            await deleteMitarbeiter(selectedRecord.id);
             grid.refresh();
         }
     });

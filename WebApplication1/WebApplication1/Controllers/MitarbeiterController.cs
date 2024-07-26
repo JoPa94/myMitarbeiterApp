@@ -32,9 +32,9 @@ namespace WebApplication1.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
-                throw;  // Will ich throwen?
             }
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult>GetById(int id)
         {
@@ -52,12 +52,21 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public void Create(Mitarbeiter mitarbeiter)
+        public async Task<IActionResult> Create(Mitarbeiter mitarbeiter)
         {
-            _logger.LogInformation("Create method called with Id: {mitarbeiter}", mitarbeiter.Id);
-            _mitarbeiterService.Create(mitarbeiter);
+            _logger.LogInformation("Create method called with Id: {mitarbeiterId}", mitarbeiter.Id);
+            try
+            {
+                await _mitarbeiterService.Create(mitarbeiter);
+                return CreatedAtAction(nameof(GetById), new { id = mitarbeiter.Id }, mitarbeiter);
+                //???return Ok(); or return(mitarbeiter) instead ?
+            }
+            catch (Exception)
+            {
+                return BadRequest(new {title = "Bad Request", status = 400, message = $"Error occurred while creating Mitarbeiter with ID: {mitarbeiter.Id}."});
+            }
 
-        }       //TODO: SWagger works, but client not!
+        }
 
         //[HttpPut("{id}")]
         //public ActionResult Update(int id, Mitarbeiter mitarbeiter)
@@ -72,16 +81,16 @@ namespace WebApplication1.Controllers
         //    return NotFound();
         //}
 
-        //[HttpDelete("{id}")]
-        //public ActionResult Delete(int id)
-        //{
-        //    _logger.LogInformation("Delete method called with id: {id}", id);
-        //    var deleted = _mitarbeiterService.Delete(id);
-        //    if (deleted)
-        //    {
-        //        return NoContent();
-        //    }
-        //    return NotFound(); 
-        //}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            _logger.LogInformation($"Delete method called with ID: {id}");
+            int deleted = await _mitarbeiterService.Delete(id);
+            if (deleted > 0)
+            {
+                return Ok(new {title = "Success", status = 200, message = $"Mitarbeiter with ID: {id} successfully deleted." });
+            }
+            return NotFound(new { title = "Not Found", status = 404 , message = $"Mitarbeiter with ID: {id} not found"});
+        }
     }
 }

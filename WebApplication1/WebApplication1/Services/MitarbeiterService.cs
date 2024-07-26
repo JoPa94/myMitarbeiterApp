@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Data;
+using System.Linq;
 using WebApplication1.Controllers;
 using WebApplication1.Models;
 using webAppServer.Data;
@@ -72,15 +74,17 @@ namespace WebApplication1.Services
         //    return true;
         //}
 
-        //public bool Delete(int id)
-        //{
-        //    var mitarbeiter = GetByID(id);
-        //    if (mitarbeiter == null)
-        //    {
-        //        return false;
-        //    }
-        //    MitarbeiterListe.Remove(mitarbeiter);
-        //    return true;
-        //}
+        public async Task<int> Delete(int id)
+        {
+            try
+            {
+                _context.Mitarbeiter.Remove(new Mitarbeiter { Id = id });
+                return await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
     }
 }
