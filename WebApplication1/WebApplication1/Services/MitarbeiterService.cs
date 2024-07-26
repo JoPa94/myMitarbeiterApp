@@ -22,20 +22,24 @@ namespace WebApplication1.Services
         public async Task<List<Mitarbeiter>?> GetAll()
         {
             return await _context.Mitarbeiter.ToListAsync();
-
         }
         public async Task<Mitarbeiter?> GetByID(int id)
         {
             return await _context.Mitarbeiter.FindAsync(id);
         }
 
-        public async Task Create(Mitarbeiter mitarbeiter)
+        public async Task<EntityEntry> Create(Mitarbeiter mitarbeiter)
         {
-            _context.Mitarbeiter.Add(mitarbeiter);
-            await _context.SaveChangesAsync();
+            EntityEntry? createdMitarbeiter = await _context.Mitarbeiter.AddAsync(mitarbeiter);
+            if(createdMitarbeiter != null)
+            {
+                await _context.SaveChangesAsync();
+                return createdMitarbeiter;
+            }
+            return createdMitarbeiter;
         }
 
-        public async Task<Mitarbeiter?> Update(Mitarbeiter mitarbeiter)     //TODO: return mitarbeiter, no bool
+        public async Task<Mitarbeiter?> Update(Mitarbeiter mitarbeiter)
         {
             try
             {

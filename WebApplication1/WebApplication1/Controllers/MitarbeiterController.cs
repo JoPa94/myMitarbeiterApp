@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using WebApplication1.Models;
 using WebApplication1.Services;
@@ -24,23 +25,21 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Mitarbeiter>>> GetAll()
         {
-            try
+            var mitarbeiter = await _mitarbeiterService.GetAll();
+            if (mitarbeiter.IsNullOrEmpty())
             {
-                var mitarbeiter = await _mitarbeiterService.GetAll();
-                return Ok(mitarbeiter);
+                return BadRequest();
+
             }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            return Ok(mitarbeiter);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult>GetById(int id)
         {
             _logger.LogInformation("GetById method called with id: {id}", id);
-            var mitarbeiter = await _mitarbeiterService.GetByID(id);
 
+            var mitarbeiter = await _mitarbeiterService.GetByID(id);
             if (mitarbeiter == null)
             {
                 return NotFound();
@@ -52,16 +51,14 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Create(Mitarbeiter mitarbeiter)
         {
             _logger.LogInformation("Create method called with Id: {mitarbeiterId}", mitarbeiter.Id);
-            try
+
+            var createdMitarbeiter = await _mitarbeiterService.Create(mitarbeiter);
+            if (createdMitarbeiter == null)
             {
-                await _mitarbeiterService.Create(mitarbeiter);
-                return CreatedAtAction(nameof(GetById), new { id = mitarbeiter.Id }, mitarbeiter);
-                //??? return Ok(); or return(mitarbeiter) instead ?
+                return BadRequest(new { title = "Bad Request", status = 400, message = $"Error occurred while creating Mitarbeiter with ID: {mitarbeiter.Id}." });
             }
-            catch (Exception)
-            {
-                return BadRequest(new {title = "Bad Request", status = 400, message = $"Error occurred while creating Mitarbeiter with ID: {mitarbeiter.Id}."});
-            }
+            return CreatedAtAction(nameof(GetById), new { id = mitarbeiter.Id }, mitarbeiter);
+            //??? return Ok(); or return(mitarbeiter) instead ?
         }
 
         [HttpPut]
@@ -77,7 +74,6 @@ namespace WebApplication1.Controllers
             }
             return NotFound();
         }
-
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

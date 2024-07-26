@@ -32,13 +32,10 @@ function clearForm() {
 async function saveData() {     //??? If id is 0 the new mitarbeier will be created, could just use put and remove CREATE
     if (formObject.validate()) {
         let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
-        console.log(mitarbeiter.id)
-        console.log(mitarbeiter.id === 0);
-        console.log(typeof(mitarbeiter.id))
-        if (mitarbeiter.id === 0) {     // Id is 0 if the employee is newly ceated
+        if (mitarbeiter.id !== 0) {     // Id is 0 if the employee is newly ceated
             try {   // UPDATE
                 console.log(JSON.stringify(mitarbeiter))
-                const response = await fetch(`https://localhost:7155/Mitarbeiter/${id}`, {
+                const response = await fetch(`https://localhost:7155/Mitarbeiter`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'

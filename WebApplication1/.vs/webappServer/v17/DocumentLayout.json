@@ -32,9 +32,10 @@
               "RelativeDocumentMoniker": "WebApplication1\\Models\\Mitarbeiter.cs",
               "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Models\\Mitarbeiter.cs",
               "RelativeToolTip": "WebApplication1\\Models\\Mitarbeiter.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAIAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-26T09:00:40.993Z"
+              "WhenOpened": "2024-07-26T09:00:40.993Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -44,7 +45,7 @@
               "RelativeDocumentMoniker": "WebApplication1\\Controllers\\MitarbeiterController.cs",
               "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Controllers\\MitarbeiterController.cs",
               "RelativeToolTip": "WebApplication1\\Controllers\\MitarbeiterController.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAYwDYAAAAPAAAA",
+              "ViewState": "AQIAACIAAAAAAAAAAAAuwDwAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-18T12:19:55.16Z",
               "EditorCaption": ""
@@ -57,7 +58,7 @@
               "RelativeDocumentMoniker": "WebApplication1\\Services\\MitarbeiterService.cs",
               "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs",
               "RelativeToolTip": "WebApplication1\\Services\\MitarbeiterService.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAawCcAAAAPAAAA",
+              "ViewState": "AQIAACkAAAAAAAAAAAAAADAAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-18T12:17:09.013Z",
               "EditorCaption": ""

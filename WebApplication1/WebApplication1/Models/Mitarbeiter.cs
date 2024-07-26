@@ -6,7 +6,6 @@ namespace WebApplication1.Models
 {
     public class Mitarbeiter
     {
-
         [Key]
         public int Id { get; set; }
         public string? Vorname { get; set; }
@@ -15,6 +14,5 @@ namespace WebApplication1.Models
         public int Geschlecht { get; set; }
         public bool Qualifiziert { get; set; }
         public string? Notiz { get; set; }
-
     }
 }
