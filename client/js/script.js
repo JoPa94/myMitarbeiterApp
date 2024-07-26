@@ -31,16 +31,13 @@ function clearForm() {
 
 async function saveData() {
     if (formObject.validate()) {
-        const id = idTextBox.value; //TODO Move down to line 39, the new Mitarbeiter constructor?
-        const vorname = vornameTextBox.value;
-        const nachname = nachnameTextBox.value;
-        const geburtsdatum = datepicker.value;
-        const geschlecht = parseInt(comboBox.value);
-        const qualifiziert = checkbox.checked;
-        const notiz = notizRte.getText();
-        let mitarbeiter = new Mitarbeiter(id, vorname, nachname, geburtsdatum, geschlecht, qualifiziert, notiz);
-        if (!idTextBox.value) {     // Id is 0 if the employee is newly created
-            try {
+        let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
+        console.log(mitarbeiter.id)
+        console.log(mitarbeiter.id === 0);
+        console.log(typeof(mitarbeiter.id))
+        if (mitarbeiter.id === 0) {     // Id is 0 if the employee is newly ceated
+            try {   // UPDATE
+                console.log(JSON.stringify(mitarbeiter))
                 const response = await fetch(`https://localhost:7155/Mitarbeiter/${id}`, {
                     method: 'PUT',
                     headers: {
@@ -55,7 +52,7 @@ async function saveData() {
             } catch (error) {
                 console.error('Error updating employee:', error);
             }
-        } else {
+        } else {    // CREATE
             try {
                 const response = await fetch("https://localhost:7155/Mitarbeiter", {
                     method: 'POST',
@@ -156,10 +153,9 @@ function createControlls() {
     formObject = new ej.inputs.FormValidator('#myForm', options);
     // Initialize TextBox elements
     idTextBox = new ej.inputs.TextBox({
-        placeholder: 'id',
         floatLabelType: 'Auto',
     });
-    idTextBox.appendTo('#id');
+    idTextBox.appendTo('#txt_id');
 
     vornameTextBox = new ej.inputs.TextBox({
         placeholder: 'Vorname',

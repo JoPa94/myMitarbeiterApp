@@ -16,8 +16,6 @@ namespace WebApplication1.Models
         public int Geschlecht { get; set; }
         public bool Qualifiziert { get; set; }
         public string? Notiz { get; set; }
-        
-        public Mitarbeiter(int id = 0, string? vorname = null, string? nachname = null, DateTime geburtsdatum = new DateTime(), int geschlecht = 0, bool qualifiziert = false, string? notiz = null) =>
-            (Id, Vorname, Nachname, Geburtsdatum, Geschlecht, Qualifiziert, Notiz) = (id, vorname, nachname, geburtsdatum, geschlecht, qualifiziert, notiz);
-        }       //TODO: Remove ctor
+
+    }
 }

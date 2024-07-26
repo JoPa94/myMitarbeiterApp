@@ -17,14 +17,6 @@ namespace WebApplication1.Services
         {
             _context = context;
         }
-        private readonly static List<Mitarbeiter> MitarbeiterListe = new List<Mitarbeiter>
-        {
-            new Mitarbeiter(1, "x", "x", new DateTime(1985, 5, 14), 1, true, "x"),
-            new Mitarbeiter(2, "x", "x", new DateTime(1990, 8, 22), 2, false, "x"),
-            new Mitarbeiter(3, "x", "x", new DateTime(1978, 12, 3), 1, true, "x"),
-            new Mitarbeiter(4, "x", "x", new DateTime(1982, 7, 30), 2, true, "x"),
-            new Mitarbeiter(5, "x", "x", new DateTime(1965, 4, 1), 1, false, "x")
-        };
 
         public async Task<List<Mitarbeiter>?> GetAll()
         {
