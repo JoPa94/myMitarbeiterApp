@@ -29,9 +29,9 @@ function clearForm() {
     $('#myForm')[0].reset();
 }
 
-async function saveData() {     //??? If id is 0 the new mitarbeier will be created, could just use put and remove CREATE
+async function saveData() {
     if (formObject.validate()) {
-        let mitarbeiterTest = getDataId(parseInt(idTextBox.value));
+        let mitarbeiterTest = await getDataId(parseInt(idTextBox.value));
         let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
         console.log(mitarbeiterTest);
         if (mitarbeiterTest.id != 0) {     // Id is 0 if the employee is newly ceated
@@ -41,7 +41,7 @@ async function saveData() {     //??? If id is 0 the new mitarbeier will be crea
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(mitarbeiterTest)
+                    body: JSON.stringify(mitarbeiter)
                 });
 
                 if (!response.ok) {
@@ -89,7 +89,6 @@ export async function getData() {
 
 export async function getDataId(txt_id) {
     const url = `https://localhost:7155/Mitarbeiter/${txt_id}`;
-    console.log(url);
     try {
         const response = await fetch(url);
         if (!response.ok) {
