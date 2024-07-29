@@ -43,4 +43,4 @@ app.MapControllers();
 
 app.Run();
 
-//??? Singelton vs Scoped 
+//??? Singelton vs Scoped (closed nach benutzung) vs transient (Bleibt offen z.B. Token, Cache)

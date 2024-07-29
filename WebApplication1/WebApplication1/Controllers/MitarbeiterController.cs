@@ -7,6 +7,9 @@ using WebApplication1.Models;
 using WebApplication1.Services;
 using webAppServer.Data;
 
+//TODO: MST Unit test
+
+//C: \Users\ioanis.palaskas\Desktop\myMitarbeiterApp\WebApplication1\WebApplication1\Test\webAppServer.csproj
 namespace WebApplication1.Controllers
 {
     [ApiController]
@@ -28,23 +31,22 @@ namespace WebApplication1.Controllers
             var mitarbeiter = await _mitarbeiterService.GetAll();
             if (mitarbeiter.IsNullOrEmpty())
             {
-                return BadRequest();
-
+                return BadRequest(new { title = "Bad Request", status = 400, message = $"Error occurred while fetching all Mitarbeiter." });
             }
             return Ok(mitarbeiter);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult>GetById(int id)
+        public async Task<Mitarbeiter?>GetById(int id)
         {
             _logger.LogInformation("GetById method called with id: {id}", id);
 
             var mitarbeiter = await _mitarbeiterService.GetByID(id);
-            if (mitarbeiter == null)
-            {
-                return NotFound();
-            }
-            return Ok(mitarbeiter);
+            //if (mitarbeiter == null)
+            //{
+            //    return NotFound(mitarbeiter);
+            //}
+            return mitarbeiter;
         }
 
         [HttpPost]
@@ -52,13 +54,21 @@ namespace WebApplication1.Controllers
         {
             _logger.LogInformation("Create method called with Id: {mitarbeiterId}", mitarbeiter.Id);
 
-            var createdMitarbeiter = await _mitarbeiterService.Create(mitarbeiter);
-            if (createdMitarbeiter == null)
-            {
-                return BadRequest(new { title = "Bad Request", status = 400, message = $"Error occurred while creating Mitarbeiter with ID: {mitarbeiter.Id}." });
-            }
-            return CreatedAtAction(nameof(GetById), new { id = mitarbeiter.Id }, mitarbeiter);
-            //??? return Ok(); or return(mitarbeiter) instead ?
+            //var createdMitarbeiter = await _mitarbeiterService.Create(mitarbeiter);
+
+            //return await _mitarbeiterService.Create(mitarbeiter) != null ?
+            //                                 Ok(mitarbeiter) :
+            //                                 BadRequest(new { title = "Bad Request", status = 400, message = $"Error occurred while creating Mitarbeiter with ID: {mitarbeiter.Id}." });
+
+
+
+            //if (createdMitarbeiter == null)
+            //{
+            //    return BadRequest(new { title = "Bad Request", status = 400, message = $"Error occurred while creating Mitarbeiter with ID: {mitarbeiter.Id}." });
+            //}
+            //return CreatedAtAction(nameof(GetById), new { id = mitarbeiter.Id }, mitarbeiter);
+
+            return await _mitarbeiterService.Create(mitarbeiter) != null ? CreatedAtAction(nameof(GetById), new { id = mitarbeiter.Id }, mitarbeiter) : BadRequest();
         }
 
         [HttpPut]
@@ -69,10 +79,9 @@ namespace WebApplication1.Controllers
 
             if (mitarbeiterUpdated != null)
             {
-                Console.WriteLine($"Mitarbeiter: {mitarbeiter.Id}, {mitarbeiter.Vorname}, {mitarbeiter.Nachname} angelegt");
-                return NoContent();
+                return Ok(new { title = "Success", status = 200, message = $"Mitarbeiter with ID: {mitarbeiter.Id} successfully updated." });
             }
-            return NotFound();
+            return NotFound(new { title = "Not Found", status = 404, message = $"Mitarbeiter with ID: {mitarbeiter.Id} not found" });
         }
 
         [HttpDelete("{id}")]

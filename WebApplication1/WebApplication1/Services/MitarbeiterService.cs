@@ -28,22 +28,22 @@ namespace WebApplication1.Services
             return await _context.Mitarbeiter.FindAsync(id);
         }
 
-        public async Task<EntityEntry> Create(Mitarbeiter mitarbeiter)
+        public async Task<Mitarbeiter?> Create(Mitarbeiter mitarbeiter)
         {
-            EntityEntry? createdMitarbeiter = await _context.Mitarbeiter.AddAsync(mitarbeiter);
-            if(createdMitarbeiter != null)
+            if (mitarbeiter != null)
             {
-                await _context.SaveChangesAsync();
-                return createdMitarbeiter;
+                await _context.Mitarbeiter.AddAsync(mitarbeiter);
+
+                return await _context.SaveChangesAsync() > 0 ? mitarbeiter : null;
             }
-            return createdMitarbeiter;
+            return null;
         }
 
         public async Task<Mitarbeiter?> Update(Mitarbeiter mitarbeiter)
         {
             try
             {
-                if (mitarbeiter.Id == 0)
+                if (mitarbeiter.Id == 0)    // TODO: Check db
                 {
                     return null;
                 }
@@ -59,26 +59,18 @@ namespace WebApplication1.Services
                 return null;
             }
         }
-            //    if (_context.Mitarbeiter.Find(mitarbeiter.Id) != null)
-            //    {
-            //        _context.Mitarbeiter.Update(mitarbeiter);
-            //        await _context.SaveChangesAsync();
-            //        return true;
-            //    }
-            //    return false;
-            //}
 
-            public async Task<int> Delete(int id)
+        public async Task<int> Delete(int id)   //TODO return bool
+        {
+            try
             {
-                try
-                {
-                    _context.Mitarbeiter.Remove(new Mitarbeiter { Id = id });
-                    return await _context.SaveChangesAsync();
-                }
-                catch (Exception)
-                {
-                    return -1;
-                }
+                _context.Mitarbeiter.Remove(new Mitarbeiter { Id = id });
+                return await _context.SaveChangesAsync();
             }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
     }
 }

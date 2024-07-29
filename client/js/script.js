@@ -31,16 +31,17 @@ function clearForm() {
 
 async function saveData() {     //??? If id is 0 the new mitarbeier will be created, could just use put and remove CREATE
     if (formObject.validate()) {
+        let mitarbeiterTest = getDataId(parseInt(idTextBox.value));
         let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
-        if (mitarbeiter.id !== 0) {     // Id is 0 if the employee is newly ceated
+        console.log(mitarbeiterTest);
+        if (mitarbeiterTest.id != 0) {     // Id is 0 if the employee is newly ceated
             try {   // UPDATE
-                console.log(JSON.stringify(mitarbeiter))
                 const response = await fetch(`https://localhost:7155/Mitarbeiter`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(mitarbeiter)
+                    body: JSON.stringify(mitarbeiterTest)
                 });
 
                 if (!response.ok) {
@@ -56,7 +57,7 @@ async function saveData() {     //??? If id is 0 the new mitarbeier will be crea
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(mitarbeiter)
+                    body: JSON.stringify(mitarbeiterTest)
                 });
 
                 if (!response.ok) {
@@ -74,6 +75,21 @@ async function saveData() {     //??? If id is 0 the new mitarbeier will be crea
 
 export async function getData() {
     const url = "https://localhost:7155/Mitarbeiter";
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Failed to fetch data:', error.message);
+    }
+    return [];
+}
+
+export async function getDataId(txt_id) {
+    const url = `https://localhost:7155/Mitarbeiter/${txt_id}`;
+    console.log(url);
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -214,7 +230,7 @@ async function createGrid() {
         toolbar: ['Delete', 'Edit'],
         editSettings: { allowEditing: true, allowDeleting: true },
         columns: [
-            { field: 'id', headerText: 'ID', width: 60, type: 'number', isPrimaryKey: true, visible: true },
+            { field: 'id', headerText: 'ID', width: 60, type: 'number', isPrimaryKey: true, visible: false },
             { field: 'vorname', headerText: 'Vorname', width: 140, type: 'string', textAlign: 'Center', validationRules: { required: true } },
             { field: 'nachname', headerText: 'Nachname', width: 140, type: 'string', textAlign: 'Center', validationRules: { required: true } },
             {
