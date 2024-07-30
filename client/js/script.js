@@ -1,3 +1,5 @@
+//TODO: Action begin in documentation (args)
+
 import { Mitarbeiter } from "./mitarbeiter.js";
 ej.base.enableRipple(true);
 
@@ -245,7 +247,7 @@ async function saveData() {
     if (formObject.validate()) {
         let exists = await mitarbeiterExists(parseInt(idTextBox.value));
         let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
-        if (exists) {     // Id is 0 if the employee is newly ceated
+        if (exists) {
             try {   // UPDATE
                 const response = await fetch(`https://localhost:7155/Mitarbeiter`, {
                     method: 'PUT',

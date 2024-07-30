@@ -7,9 +7,6 @@ using WebApplication1.Models;
 using WebApplication1.Services;
 using webAppServer.Data;
 
-//TODO: MST Unit test
-
-//C: \Users\ioanis.palaskas\Desktop\myMitarbeiterApp\WebApplication1\WebApplication1\Test\webAppServer.csproj
 namespace WebApplication1.Controllers
 {
     [ApiController]
@@ -42,11 +39,6 @@ namespace WebApplication1.Controllers
             _logger.LogInformation("GetById method called with id: {id}", id);
 
             var mitarbeiter = await _mitarbeiterService.GetByID(id);
-            //if (mitarbeiter == null)
-            //{
-            //    return NotFound(mitarbeiter);
-            //}
-
             return mitarbeiter;
         }
 

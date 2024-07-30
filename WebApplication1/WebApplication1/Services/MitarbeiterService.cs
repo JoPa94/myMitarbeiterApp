@@ -63,11 +63,15 @@ namespace WebApplication1.Services
             }
         }
 
-        public async Task<bool> Delete(int id)   //TODO return bool
+        public async Task<bool> Delete(int id)
         {
             try
             {
-                _context.Mitarbeiter.Remove(new Mitarbeiter { Id = id });
+                var getDeletedMitarbeiter = await GetByID(id);
+                if (getDeletedMitarbeiter != null)
+                {                
+                    _context.Mitarbeiter.Remove(getDeletedMitarbeiter);
+                }
                 return await _context.SaveChangesAsync() > 0 ? true : false;
             }
             catch (Exception)

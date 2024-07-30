@@ -3,27 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AF79C9D0-47E7-46E9-ACAA-631AEAE4D8A1}|webAppServerTests\\webAppServerTests.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\webappservertests\\controllers\\mitarbeitercontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF79C9D0-47E7-46E9-ACAA-631AEAE4D8A1}|webAppServerTests\\webAppServerTests.csproj|solutionrelative:webappservertests\\controllers\\mitarbeitercontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\webapplication1\\controllers\\mitarbeitercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|solutionrelative:webapplication1\\controllers\\mitarbeitercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ioanis.palaskas\\AppData\\Local\\SourceServer\\0b732296e9d9ef6edcb5e322d3fad03e3a9f473d678f49c8261c251ee1cb26ce\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\webapplication1\\models\\mitarbeiter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|solutionrelative:webapplication1\\models\\mitarbeiter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5D25102-5ACE-4DA7-99AA-29278C1AB91E}|Test2\\Test2.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\test2\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5D25102-5ACE-4DA7-99AA-29278C1AB91E}|Test2\\Test2.csproj|solutionrelative:test2\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F5D25102-5ACE-4DA7-99AA-29278C1AB91E}|Test2\\Test2.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\test2\\mitarbeiterservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5D25102-5ACE-4DA7-99AA-29278C1AB91E}|Test2\\Test2.csproj|solutionrelative:test2\\mitarbeiterservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\webapplication1\\services\\mitarbeiterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|solutionrelative:webapplication1\\services\\mitarbeiterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|c:\\users\\ioanis.palaskas\\desktop\\mymitarbeiterapp\\webapplication1\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FFA73FBD-CE16-491D-A600-3DEC06831CB3}|WebApplication1\\webAppServer.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,86 +22,46 @@
       "DocumentGroups": [
         {
           "DockedWidth": 307,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MitarbeiterControllerTests.cs",
-              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\webAppServerTests\\Controllers\\MitarbeiterControllerTests.cs",
-              "RelativeDocumentMoniker": "webAppServerTests\\Controllers\\MitarbeiterControllerTests.cs",
-              "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\webAppServerTests\\Controllers\\MitarbeiterControllerTests.cs",
-              "RelativeToolTip": "webAppServerTests\\Controllers\\MitarbeiterControllerTests.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAUwCUAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T06:33:10.645Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UnitTest1.cs",
-              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\Test2\\UnitTest1.cs",
-              "RelativeDocumentMoniker": "Test2\\UnitTest1.cs",
-              "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\Test2\\UnitTest1.cs",
-              "RelativeToolTip": "Test2\\UnitTest1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T06:27:42.39Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Mitarbeiter.cs",
-              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Models\\Mitarbeiter.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Models\\Mitarbeiter.cs",
-              "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Models\\Mitarbeiter.cs",
-              "RelativeToolTip": "WebApplication1\\Models\\Mitarbeiter.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T06:26:26.038Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "MitarbeiterService.cs",
-              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\AppData\\Local\\SourceServer\\0b732296e9d9ef6edcb5e322d3fad03e3a9f473d678f49c8261c251ee1cb26ce\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\0b732296e9d9ef6edcb5e322d3fad03e3a9f473d678f49c8261c251ee1cb26ce\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs",
-              "ToolTip": "C:\\Users\\ioanis.palaskas\\AppData\\Local\\SourceServer\\0b732296e9d9ef6edcb5e322d3fad03e3a9f473d678f49c8261c251ee1cb26ce\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs",
-              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\SourceServer\\0b732296e9d9ef6edcb5e322d3fad03e3a9f473d678f49c8261c251ee1cb26ce\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAABAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
+              "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Program.cs",
+              "RelativeToolTip": "WebApplication1\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T06:12:24.758Z",
+              "WhenOpened": "2024-07-30T11:33:08.549Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MitarbeiterController.cs",
-              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Controllers\\MitarbeiterController.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\MitarbeiterController.cs",
-              "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Controllers\\MitarbeiterController.cs",
-              "RelativeToolTip": "WebApplication1\\Controllers\\MitarbeiterController.cs",
-              "ViewState": "AQIAAEkAAAAAAAAAAAAYwFYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "OverriddenGroupName": "WebApplication1\\Controllers",
-              "WhenOpened": "2024-07-18T12:19:55.16Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "MitarbeiterService.cs",
               "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Services\\MitarbeiterService.cs",
               "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs",
               "RelativeToolTip": "WebApplication1\\Services\\MitarbeiterService.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAqwEkAAAANAAAA",
+              "ViewState": "AQIAADkAAAAAAAAAAAAowEoAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "OverriddenGroupName": "WebApplication1\\Services",
-              "WhenOpened": "2024-07-29T11:17:00.685Z"
+              "WhenOpened": "2024-07-30T10:35:26.909Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MitarbeiterServiceTests.cs",
+              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\Test2\\MitarbeiterServiceTests.cs",
+              "RelativeDocumentMoniker": "Test2\\MitarbeiterServiceTests.cs",
+              "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\Test2\\MitarbeiterServiceTests.cs",
+              "RelativeToolTip": "Test2\\MitarbeiterServiceTests.cs",
+              "ViewState": "AQIAADMAAAAAAAAAAAAcwDoAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-30T09:20:11.773Z",
+              "EditorCaption": ""
             }
           ]
         }
