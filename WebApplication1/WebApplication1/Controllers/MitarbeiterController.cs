@@ -89,7 +89,7 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             _logger.LogInformation($"Delete method called with ID: {id}");
-            if (await _mitarbeiterService.Delete(id) > 0)
+            if (await _mitarbeiterService.Delete(id))
             {
                 return Ok(new {title = "Success", status = 200, message = $"Mitarbeiter with ID: {id} successfully deleted." });
             }

@@ -63,16 +63,16 @@ namespace WebApplication1.Services
             }
         }
 
-        public async Task<int> Delete(int id)   //TODO return bool
+        public async Task<bool> Delete(int id)   //TODO return bool
         {
             try
             {
                 _context.Mitarbeiter.Remove(new Mitarbeiter { Id = id });
-                return await _context.SaveChangesAsync();
+                return await _context.SaveChangesAsync() > 0 ? true : false;
             }
             catch (Exception)
             {
-                return -1;
+                return false;
             }
         }
     }
