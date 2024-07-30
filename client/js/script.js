@@ -10,103 +10,7 @@ const genders = [
     { Id: 3, Gender: 'Anderes' },
 ];
 
-function editRowData(rowData) {
-    idTextBox.value = rowData.id;
-    vornameTextBox.value = rowData.vorname;
-    nachnameTextBox.value = rowData.nachname;
-    datepicker.value = new Date(rowData.geburtsdatum);
-    comboBox.value = rowData.geschlecht;
-    checkbox.checked = rowData.qualifiziert;
-    notizRte.value = rowData.notiz;
-}
-
-$(document).ready((args) => {
-    init();
-});
-
-// Button functions
-function clearForm() {
-    $('#myForm')[0].reset();
-}
-
-async function saveData() {
-    if (formObject.validate()) {
-        let mitarbeiterTest = await getDataId(parseInt(idTextBox.value));
-        let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
-        console.log(mitarbeiterTest);
-        if (mitarbeiterTest.id != 0) {     // Id is 0 if the employee is newly ceated
-            try {   // UPDATE
-                const response = await fetch(`https://localhost:7155/Mitarbeiter`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(mitarbeiter)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Error updating employee: ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error updating employee:', error);
-            }
-        } else {    // CREATE
-            try {
-                const response = await fetch("https://localhost:7155/Mitarbeiter", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(mitarbeiterTest)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Error creating employee: ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error creating employee:', error);
-            }
-        }
-        grid.dataSource = await getData(); // Update the grid data source
-        grid.refresh();
-        clearForm();
-    }
-}
-
-export async function getData() {
-    const url = "https://localhost:7155/Mitarbeiter";
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Failed to fetch data:', error.message);
-    }
-    return [];
-}
-
-export async function getDataId(txt_id) {
-    const url = `https://localhost:7155/Mitarbeiter/${txt_id}`;
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Failed to fetch data:', error.message);
-    }
-    return [];
-}
-
-export async function init() {
-    await loadLocales()
-    createGrid();
-    createControlls();
-}
-
+// functions
 async function loadLocales() {
     var calendarData, currenciesData, numberSystemData, numbersData, timeZoneNamesData;
     ej.base.L10n.load({
@@ -147,6 +51,35 @@ async function loadLocales() {
         ej.base.setCulture('de');
         ej.base.setCurrencyCode('EUR');
     });
+}
+
+export async function getData() {
+    const url = "https://localhost:7155/Mitarbeiter";
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Failed to fetch data:', error.message);
+    }
+    return [];
+}
+
+export async function mitarbeiterExists(txt_id) {   //If Mitarbeiter exists 200 will be returned, if not 204 (Not content) is returned
+    const url = `https://localhost:7155/Mitarbeiter/${txt_id}`;
+    try {
+        const response = await fetch(url);
+        if (response.status != 204) {
+            return true;
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+    } catch (error) {
+        console.error('Failed to fetch data (Employee may not exist):', error.message);
+    }
+    return false;
 }
 
 function createControlls() {
@@ -292,3 +225,72 @@ async function deleteMitarbeiter(id) {
         console.error('Error updating employee:', error);
     }
 }
+
+function editRowData(rowData) {
+    idTextBox.value = rowData.id;
+    vornameTextBox.value = rowData.vorname;
+    nachnameTextBox.value = rowData.nachname;
+    datepicker.value = new Date(rowData.geburtsdatum);
+    comboBox.value = rowData.geschlecht;
+    checkbox.checked = rowData.qualifiziert;
+    notizRte.value = rowData.notiz;
+}
+
+// Button functions
+function clearForm() {
+    $('#myForm')[0].reset();
+}
+
+async function saveData() {
+    if (formObject.validate()) {
+        let exists = await mitarbeiterExists(parseInt(idTextBox.value));
+        let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
+        if (exists) {     // Id is 0 if the employee is newly ceated
+            try {   // UPDATE
+                const response = await fetch(`https://localhost:7155/Mitarbeiter`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(mitarbeiter)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error updating employee: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error updating employee:', error);
+            }
+        } else {    // CREATE
+            try {
+                const response = await fetch("https://localhost:7155/Mitarbeiter", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(mitarbeiter)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error creating employee: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error creating employee:', error);
+            }
+        }
+        grid.dataSource = await getData(); // Update the grid data source
+        grid.refresh();
+        clearForm();
+    }
+}
+
+$(document).ready((args) => {
+    init();
+});
+
+export async function init() {
+    await loadLocales()
+    createGrid();
+    createControlls();
+}
+
