@@ -8,6 +8,8 @@ using WebApplication1.Models;
 namespace Test2
 {
 
+
+
     [TestClass]
     public class UnitTest1
     {
@@ -33,10 +35,6 @@ namespace Test2
             }
 
         }
-
-
-
-       
 
         private void Initialize(out ServiceProvider resolveService)
         {
