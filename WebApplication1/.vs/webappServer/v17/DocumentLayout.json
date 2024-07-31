@@ -22,8 +22,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 307,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MitarbeiterServiceTests.cs",
+              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\Test2\\MitarbeiterServiceTests.cs",
+              "RelativeDocumentMoniker": "Test2\\MitarbeiterServiceTests.cs",
+              "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\Test2\\MitarbeiterServiceTests.cs",
+              "RelativeToolTip": "Test2\\MitarbeiterServiceTests.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAmwCcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-30T09:20:11.773Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -34,8 +47,7 @@
               "RelativeToolTip": "WebApplication1\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T11:33:08.549Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-30T11:33:08.549Z"
             },
             {
               "$type": "Document",
@@ -47,21 +59,7 @@
               "RelativeToolTip": "WebApplication1\\Services\\MitarbeiterService.cs",
               "ViewState": "AQIAADkAAAAAAAAAAAAowEoAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T10:35:26.909Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MitarbeiterServiceTests.cs",
-              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\Test2\\MitarbeiterServiceTests.cs",
-              "RelativeDocumentMoniker": "Test2\\MitarbeiterServiceTests.cs",
-              "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\Test2\\MitarbeiterServiceTests.cs",
-              "RelativeToolTip": "Test2\\MitarbeiterServiceTests.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAcwDoAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T09:20:11.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-30T10:35:26.909Z"
             }
           ]
         }

@@ -1,6 +1,20 @@
-//TODO: Action begin in documentation (args)
+// TODO: REFACTOR Edit Button in grid, to open the Sidebar (InputForm) with data
+// TODO Refresh the Grid after the Sidebar is closed (Use the data from the Grid, no extra API calls) (An edit das Grid übergeben)
+// TODO Call destory() after use of Sideabar ($(id).off(click) or PREF -> $(id).one(click))
+
+// TODO: CTL die das ganze eingabeformular zusammenfasst (Init ruft form auf) divid übergeben (Id in die das ctl geschrieben werden soll)
+// TODO  HTML von div id auf nichts setzen -> 
+// TODO: An Klasse übergeben; Div ID, SIdebar (Element), Grid?, Datarow or null,
+
+// in form()
+//         $(this.divid).html('');
+//         await fetch('/app/myjugendhilfe/ctl/ctl_leistungsnachweis_edit.html')
+//             .then(x => x.text())
+//             .then(html => {
+//                 $(this.divid).append(html);
 
 import { Mitarbeiter } from "./mitarbeiter.js";
+import { clearForm } from "./ctl_inputform.js";
 ej.base.enableRipple(true);
 
 let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, grid, data, formObject;
@@ -87,6 +101,9 @@ export async function mitarbeiterExists(txt_id) {   //If Mitarbeiter exists 200 
 function createControlls() {
     $('#clear').on('click', clearForm);
     $('#save').on('click', saveData);
+    $('#close').on('click', () => {
+        sidebar.toggle();
+    });
 
     let options = {
         rules: {
@@ -98,6 +115,7 @@ function createControlls() {
     };
 
     formObject = new ej.inputs.FormValidator('#myForm', options);
+
     // Initialize TextBox elements
     idTextBox = new ej.inputs.TextBox({
         floatLabelType: 'Auto',
@@ -161,8 +179,8 @@ async function createGrid() {
     });
     grid = new ej.grids.Grid({
         dataSource: data,
-        toolbar: ['Delete', 'Edit'],
-        editSettings: { allowEditing: true, allowDeleting: true },
+        toolbar: ['Delete', 'Edit', 'Add'],
+        editSettings: { allowEditing: true, allowDeleting: true, allowAdding: true, mode: 'Dialog'},
         columns: [
             { field: 'id', headerText: 'ID', width: 60, type: 'number', isPrimaryKey: true, visible: false },
             { field: 'vorname', headerText: 'Vorname', width: 140, type: 'string', textAlign: 'Center', validationRules: { required: true } },
@@ -206,6 +224,13 @@ async function createGrid() {
             await deleteMitarbeiter(selectedRecord.id);
             grid.refresh();
         }
+        console.log(args)
+        if (args.requestType === 'add') {
+            args.cancel = true;     // Cancel the default add behavior
+            await loadHTML();
+            createControlls(); 
+            sidebar.show(); 
+        }
     });
     let toolbar = grid.element.querySelector('.e-toolbar');
     grid.element.appendChild(toolbar);
@@ -238,10 +263,7 @@ function editRowData(rowData) {
     notizRte.value = rowData.notiz;
 }
 
-// Button functions
-function clearForm() {
-    $('#myForm')[0].reset();
-}
+
 
 async function saveData() {
     if (formObject.validate()) {
@@ -291,8 +313,34 @@ $(document).ready((args) => {
 });
 
 export async function init() {
-    await loadLocales()
+    await loadLocales();
+    await loadHTML();
     createGrid();
     createControlls();
 }
 
+//sidebar initialization
+let sidebar = new ej.navigations.Sidebar({      //???: Wenn ich das in createControlls verschiebe wird sidebar nicht mehr erkannt und kann nicht getoggled werden (Line 104 etwas hinzufügen)
+    showBackdrop: true,
+    type: "Push",
+    position: 'Right',
+    width: '50%'        //TODO: Fix width
+});
+sidebar.appendTo('#sidebar');
+
+// Close the sidebar
+// $('close').on('click', () => {
+//     sidebar.hide();
+// })
+
+async function loadHTML() {
+    $('#sidebar').html("");
+    try {
+        const response = await $.get('../ctl_inputform.html');
+        $('#sidebar').append(response);
+    } catch (error) {
+        console.error('Failed to load HTML:', error);
+    }
+}
+
+// Neues JS file für ctl_input Klasse erstellen div id übergeben die in Klasse soll (sidebar) klasse erstellt das HTML und zeigt es an ...

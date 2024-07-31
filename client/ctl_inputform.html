@@ -1,0 +1,40 @@
+<div id="aside-container">
+    <form id="myForm">
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="row mb-1 d-none">
+                    <input class="col-8" type="number" id="txt_id" value=0 />
+                </div>
+                <div class="row mb-2 input-container">
+                    <input class="col-12" type="text" id="vorname" />
+                </div>
+                <div class="row mb-2 input-container">
+                    <input class="col-12" type="text" id="nachname" />
+                </div>
+                <div class="row mb-2 input-container">
+                    <input class="col-12" id="geburtsdatum" data-msg-containerid="error_Ort" />
+                    <div id="error_Ort"></div>
+                </div>
+                <div class="row mb-2 input-container">
+                    <input class="col-12" type="text" id="geschlecht" />
+                </div>
+                <div class="row mb-2 input-container ">
+                    <input class="col-8" type="checkbox" id="qualifiziert" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="note-container mb-3">
+                    <h2>Notiz</h2>
+                    <textarea id="notiz" class="mb-1" rows="9" placeholder="Ihre Notizen hier..."></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="mb-4 d-flex justify-content-end">
+        <button type="reset" id="clear" class="btn btn-secondary me-2">Verwerfen</button>
+        <button type="submit" id="save" class="btn btn-primary">Speichern</button>
+    </div>
+</div>
+<div class="center-align">
+    <button id="close" class="e-btn close-btn">Close Sidebar</button>
+</div>

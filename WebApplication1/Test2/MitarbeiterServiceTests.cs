@@ -38,9 +38,6 @@ namespace Test2
             Notiz = "xxxcxxcx",
             };
 
-            //var test = new Mitarbeiter();
-            //Initialize(out _serviceProvider);
-
             try
             {
                 var mitarbeiterInDatabase = await _mitarbeiterService.Create(neuerMitarbeiter);
@@ -50,11 +47,9 @@ namespace Test2
                 Assert.AreEqual(mitarbeiterExists, mitarbeiterInDatabase);
                 mitarbeiterInDatabase.Vorname = neuerVorname;
 
-
                 var mitarbeiterUpdated = await _mitarbeiterService.Update(mitarbeiterInDatabase);
                 Assert.AreNotEqual(alterVorname, mitarbeiterUpdated.Vorname);
                 Assert.IsTrue(mitarbeiterInDatabase.Vorname.ToLower().Equals(mitarbeiterUpdated.Vorname.ToLower()));
-
 
                 var isDeleted = await _mitarbeiterService.Delete(mitarbeiterUpdated.Id);
                 Assert.IsTrue(isDeleted);
@@ -87,9 +82,3 @@ namespace Test2
         }
     }
 }
-
-// TODO: Object(Mitarbeiter) in der Methode saven
-// TODO:
-// TODO:
-// TODO:
-// TODO:

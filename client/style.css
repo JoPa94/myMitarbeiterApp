@@ -51,3 +51,19 @@ h2 {
 .e-input-group .e-input-group-icon:last-child, .e-input-group.e-control-wrapper .e-input-group-icon:last-child {
     color:#ac2239;
 }
+/* TODO: Hide Text of toolbar items? */
+.e-grid .e-toolbar .e-tbar-btn-text, 
+.e-grid .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text {
+    display: none;   
+}
+.e-sidebar.e-right {
+    padding: 2%;
+}
+
+.e-sidebar.e-right.e-open {
+    transition: transform 1s ease;
+}
+
+.e-sidebar.e-right.e-transition.e-close {
+    transition: transform 1s ease;
+}
