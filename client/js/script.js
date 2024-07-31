@@ -13,18 +13,10 @@
 //             .then(html => {
 //                 $(this.divid).append(html);
 
-import { Mitarbeiter } from "./mitarbeiter.js";
-import { clearForm } from "./ctl_inputform.js";
+import { createControlls, genders, sidebar } from "./ctl_inputform.js";
 ej.base.enableRipple(true);
-
-let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, grid, data, formObject;
+let data, grid;
 let selectedRecord = null;
-
-const genders = [
-    { Id: 1, Gender: 'Männlich' },
-    { Id: 2, Gender: 'Weiblich' },
-    { Id: 3, Gender: 'Anderes' },
-];
 
 // functions
 async function loadLocales() {
@@ -83,94 +75,6 @@ export async function getData() {
     return [];
 }
 
-export async function mitarbeiterExists(txt_id) {   //If Mitarbeiter exists 200 will be returned, if not 204 (Not content) is returned
-    const url = `https://localhost:7155/Mitarbeiter/${txt_id}`;
-    try {
-        const response = await fetch(url);
-        if (response.status != 204) {
-            return true;
-            throw new Error(`Response status: ${response.status}`);
-        }
-
-    } catch (error) {
-        console.error('Failed to fetch data (Employee may not exist):', error.message);
-    }
-    return false;
-}
-
-function createControlls() {
-    $('#clear').on('click', clearForm);
-    $('#save').on('click', saveData);
-    $('#close').on('click', () => {
-        sidebar.toggle();
-    });
-
-    let options = {
-        rules: {
-            'vorname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
-            'nachname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
-            'geburtsdatum': { required: true },
-            'geschlecht': { required: true },
-        }
-    };
-
-    formObject = new ej.inputs.FormValidator('#myForm', options);
-
-    // Initialize TextBox elements
-    idTextBox = new ej.inputs.TextBox({
-        floatLabelType: 'Auto',
-    });
-    idTextBox.appendTo('#txt_id');
-
-    vornameTextBox = new ej.inputs.TextBox({
-        placeholder: 'Vorname',
-        floatLabelType: 'Auto',
-    });
-    vornameTextBox.appendTo('#vorname');
-
-    nachnameTextBox = new ej.inputs.TextBox({
-        placeholder: 'Nachname',
-        floatLabelType: 'Auto',
-    });
-    nachnameTextBox.appendTo('#nachname');
-
-    // Initialize RichTextEditor
-    notizRte = new ej.richtexteditor.RichTextEditor({
-        placeholder: 'Ihre Notizen hier...',
-        height: 180,
-        maxLength: 200,
-        inlineMode: {
-            enable: true,
-            onSelection: true
-        }
-    });
-    notizRte.appendTo('#notiz');
-
-    // Initialize DatePicker
-    datepicker = new ej.calendars.DatePicker({
-        placeholder: 'Geburtsdatum',
-        enableMask: true,
-        format: 'dd/MM/yyyy',
-        max: new Date(),
-    });
-    datepicker.appendTo('#geburtsdatum');
-
-    // Initialize ComboBox
-    comboBox = new ej.dropdowns.ComboBox({
-        placeholder: "Geschlecht",
-        allowCustom: false,
-        autofill: true,
-        locale: 'de',
-        dataSource: genders,
-        fields: { text: 'Gender', value: 'Id' },
-    });
-    comboBox.appendTo('#geschlecht');
-
-    // Initialize CheckBox
-    checkbox = new ej.buttons.CheckBox({ label: 'Qualifiziert', labelPosition: 'Before' });
-    checkbox.appendTo('#qualifiziert');
-}
-
 async function createGrid() {
     data = await getData();
     data = data.map(x => {
@@ -224,7 +128,6 @@ async function createGrid() {
             await deleteMitarbeiter(selectedRecord.id);
             grid.refresh();
         }
-        console.log(args)
         if (args.requestType === 'add') {
             args.cancel = true;     // Cancel the default add behavior
             await loadHTML();
@@ -263,51 +166,6 @@ function editRowData(rowData) {
     notizRte.value = rowData.notiz;
 }
 
-
-
-async function saveData() {
-    if (formObject.validate()) {
-        let exists = await mitarbeiterExists(parseInt(idTextBox.value));
-        let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
-        if (exists) {
-            try {   // UPDATE
-                const response = await fetch(`https://localhost:7155/Mitarbeiter`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(mitarbeiter)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Error updating employee: ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error updating employee:', error);
-            }
-        } else {    // CREATE
-            try {
-                const response = await fetch("https://localhost:7155/Mitarbeiter", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(mitarbeiter)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Error creating employee: ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error creating employee:', error);
-            }
-        }
-        grid.dataSource = await getData(); // Update the grid data source
-        grid.refresh();
-        clearForm();
-    }
-}
-
 $(document).ready((args) => {
     init();
 });
@@ -319,14 +177,7 @@ export async function init() {
     createControlls();
 }
 
-//sidebar initialization
-let sidebar = new ej.navigations.Sidebar({      //???: Wenn ich das in createControlls verschiebe wird sidebar nicht mehr erkannt und kann nicht getoggled werden (Line 104 etwas hinzufügen)
-    showBackdrop: true,
-    type: "Push",
-    position: 'Right',
-    width: '50%'        //TODO: Fix width
-});
-sidebar.appendTo('#sidebar');
+
 
 // Close the sidebar
 // $('close').on('click', () => {
