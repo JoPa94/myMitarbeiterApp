@@ -1,7 +1,6 @@
 // TODO: Line 163 display the correct values in the inputfields
 
-// TODO Refresh the Grid after the Sidebar is closed (Use the data from the Grid, no extra API calls) (An edit das Grid übergeben)
-// TODO Call destory() after use of Sideabar ($(id).off(click) or PREF -> $(id).one(click))
+// ??? Refresh the Grid after the Sidebar is closed (Use the data from the Grid, no extra API calls) (An edit das Grid übergeben)
 
 // TODO: CTL die das ganze eingabeformular zusammenfasst (Init ruft form auf) divid übergeben (Id in die das ctl geschrieben werden soll)
 // TODO  HTML von div id auf nichts setzen -> 
@@ -14,7 +13,7 @@
 //             .then(html => {
 //                 $(this.divid).append(html);
 
-import { createControlls, genders, sidebar } from "./ctl_inputform.js";
+import { createControlls, genders, sidebar, createSidebar } from "./ctl_inputform.js";
 ej.base.enableRipple(true);
 export let data, grid;
 let selectedRecord = null;
@@ -161,13 +160,13 @@ async function deleteMitarbeiter(id) {
 export async function init() {
     await loadLocales();
     createGrid();
-    createControlls();
 }
 
 async function showSidebar(rowData){
     await loadHTML();
     createControlls(); 
-    sidebar.toggle();
+    createSidebar();
+    sidebar.show();
 
     if(rowData){
         $('#txt_id').val(rowData.id);

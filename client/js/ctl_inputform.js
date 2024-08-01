@@ -2,7 +2,7 @@ import { Mitarbeiter } from "./mitarbeiter.js";
 import { grid, getData } from "./script.js";
 let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, formObject;
 
-
+export let sidebar;
 
 export const genders = [
     { Id: 1, Gender: 'Männlich' },
@@ -10,22 +10,23 @@ export const genders = [
     { Id: 3, Gender: 'Anderes' },
 ];
 
-//sidebar initialization
-export let sidebar = new ej.navigations.Sidebar({
-    showBackdrop: true,
-    type: "Push",
-    position: 'Right',
-    width: '50%'        //TODO: adjust width
-});
-sidebar.appendTo('#sidebar');
+export function createSidebar(){
+    //sidebar initialization
+    sidebar = new ej.navigations.Sidebar({
+        showBackdrop: true,
+        type: "Push",
+        position: 'Right',
+        width: '50%'        //TODO: adjust width
+    });
+    sidebar.addEventListener('created', () => {
+        console.log("Sidebar created")
+    });
+    sidebar.appendTo('#sidebar');
+}
 
 export async function createControlls() {
     $('#clear').on('click', clearForm);
     $('#save').on('click', saveData);
-    $('#close').on('click', () => {
-        $('#sidebar').empty();
-        sidebar.toggle();
-    });
 
     // Initialize TextBox elements
     idTextBox = new ej.inputs.TextBox({
@@ -92,8 +93,24 @@ export async function createControlls() {
 }
 
 // Button functions
+
 export function clearForm() {
     $('#myForm')[0].reset();
+
+    sidebar.addEventListener('destroyed', () => {
+        console.log("Sidebar destroyed")
+    });
+
+    sidebar.addEventListener('close', () => {
+        console.log("Sidebar closed")
+    });
+
+    sidebar.addEventListener('change', () => {
+        console.log("Sidebar changed")
+        $('#sidebar').html("");
+        sidebar.destroy();
+    });
+    sidebar.hide();
 }
 
 export async function saveData() {
