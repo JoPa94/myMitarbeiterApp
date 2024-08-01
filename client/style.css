@@ -63,7 +63,3 @@ h2 {
 .e-sidebar.e-right.e-open {
     transition: transform 1s ease;
 }
-
-.e-sidebar.e-right.e-transition.e-close {
-    transition: transform 1s ease;
-}

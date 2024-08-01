@@ -1,4 +1,5 @@
-// TODO: REFACTOR Edit Button in grid, to open the Sidebar (InputForm) with data
+// TODO: Line 163 display the correct values in the inputfields
+
 // TODO Refresh the Grid after the Sidebar is closed (Use the data from the Grid, no extra API calls) (An edit das Grid übergeben)
 // TODO Call destory() after use of Sideabar ($(id).off(click) or PREF -> $(id).one(click))
 
@@ -15,8 +16,12 @@
 
 import { createControlls, genders, sidebar } from "./ctl_inputform.js";
 ej.base.enableRipple(true);
-let data, grid;
+export let data, grid;
 let selectedRecord = null;
+
+$(document).ready((args) => {
+    init();
+});
 
 // functions
 async function loadLocales() {
@@ -84,7 +89,7 @@ async function createGrid() {
     grid = new ej.grids.Grid({
         dataSource: data,
         toolbar: ['Delete', 'Edit', 'Add'],
-        editSettings: { allowEditing: true, allowDeleting: true, allowAdding: true, mode: 'Dialog'},
+        editSettings: { allowEditing: true, allowDeleting: true, allowAdding: true},
         columns: [
             { field: 'id', headerText: 'ID', width: 60, type: 'number', isPrimaryKey: true, visible: false },
             { field: 'vorname', headerText: 'Vorname', width: 140, type: 'string', textAlign: 'Center', validationRules: { required: true } },
@@ -111,16 +116,16 @@ async function createGrid() {
             { field: 'notiz', headerText: 'Notiz', width: 140, type: 'string' }
         ],
         allowPaging: true,
-        pageSettings: { currentPage: 1, pageSize: 5, pageCount: 4, pageSizes: true },
+        pageSettings: { currentPage: 1, pageSize: 10, pageCount: 5, pageSizes: true },
     });
     grid.appendTo('#Grid');
 
     // Event listener for beginEdit
     grid.addEventListener('actionBegin', async function (args) {
         if (args.requestType === 'beginEdit') {
-            selectedRecord = args.rowData;
-            editRowData(selectedRecord);
             args.cancel = true;  // Cancel the default editing behavior
+            selectedRecord = args.rowData;
+            showSidebar(selectedRecord);
         }
 
         if (args.requestType === 'delete') {
@@ -130,9 +135,7 @@ async function createGrid() {
         }
         if (args.requestType === 'add') {
             args.cancel = true;     // Cancel the default add behavior
-            await loadHTML();
-            createControlls(); 
-            sidebar.show(); 
+            await showSidebar()
         }
     });
     let toolbar = grid.element.querySelector('.e-toolbar');
@@ -155,34 +158,27 @@ async function deleteMitarbeiter(id) {
         console.error('Error updating employee:', error);
     }
 }
-
-function editRowData(rowData) {
-    idTextBox.value = rowData.id;
-    vornameTextBox.value = rowData.vorname;
-    nachnameTextBox.value = rowData.nachname;
-    datepicker.value = new Date(rowData.geburtsdatum);
-    comboBox.value = rowData.geschlecht;
-    checkbox.checked = rowData.qualifiziert;
-    notizRte.value = rowData.notiz;
-}
-
-$(document).ready((args) => {
-    init();
-});
-
 export async function init() {
     await loadLocales();
-    await loadHTML();
     createGrid();
     createControlls();
 }
 
+async function showSidebar(rowData){
+    await loadHTML();
+    createControlls(); 
+    sidebar.toggle();
 
-
-// Close the sidebar
-// $('close').on('click', () => {
-//     sidebar.hide();
-// })
+    if(rowData){
+        $('#txt_id').val(rowData.id);
+        $('#vorname').val(rowData.vorname).trigger('focus');
+        $('#nachname').val(rowData.nachname).trigger('focus');
+        $('#geburtsdatum').val(rowData.geburtsdatum);
+        $('#geschlecht').val(rowData.geschlecht);
+        $('#qualifiziert').val(rowData.qualifiziert);
+        $('#notiz').val(rowData.notiz).trigger('focus');
+    }
+}
 
 async function loadHTML() {
     $('#sidebar').html("");

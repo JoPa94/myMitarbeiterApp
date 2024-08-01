@@ -1,14 +1,8 @@
 import { Mitarbeiter } from "./mitarbeiter.js";
+import { grid, getData } from "./script.js";
 let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, formObject;
-let options = {
-    rules: {
-        'vorname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
-        'nachname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
-        'geburtsdatum': { required: true },
-        'geschlecht': { required: true },
-    }
-};
-formObject = await new ej.inputs.FormValidator('#myForm', options);
+
+
 
 export const genders = [
     { Id: 1, Gender: 'Männlich' },
@@ -21,14 +15,15 @@ export let sidebar = new ej.navigations.Sidebar({
     showBackdrop: true,
     type: "Push",
     position: 'Right',
-    width: '50%'        //TODO: Fix width
+    width: '50%'        //TODO: adjust width
 });
 sidebar.appendTo('#sidebar');
 
-export function createControlls() {
+export async function createControlls() {
     $('#clear').on('click', clearForm);
     $('#save').on('click', saveData);
     $('#close').on('click', () => {
+        $('#sidebar').empty();
         sidebar.toggle();
     });
 
@@ -85,6 +80,15 @@ export function createControlls() {
     // Initialize CheckBox
     checkbox = new ej.buttons.CheckBox({ label: 'Qualifiziert', labelPosition: 'Before' });
     checkbox.appendTo('#qualifiziert');
+    let options = {
+        rules: {
+            'vorname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
+            'nachname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
+            'geburtsdatum': { required: true },
+            'geschlecht': { required: true },
+        }
+    };
+    formObject = await new ej.inputs.FormValidator('#myForm', options);
 }
 
 // Button functions
@@ -93,7 +97,7 @@ export function clearForm() {
 }
 
 export async function saveData() {
-    if (formObject.validate()) {    //FIXME
+    if (formObject.validate()) {
         let exists = await mitarbeiterExists(parseInt(idTextBox.value));
         let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
         if (exists) {
@@ -129,8 +133,8 @@ export async function saveData() {
                 console.error('Error creating employee:', error);
             }
         }
-        // grid.dataSource = await getData(); // Update the grid data source
-        // grid.refresh();
+        grid.dataSource = await getData(); // Update the grid data source
+        grid.refresh();
         clearForm();
     }
 }
