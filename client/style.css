@@ -51,7 +51,7 @@ h2 {
 .e-input-group .e-input-group-icon:last-child, .e-input-group.e-control-wrapper .e-input-group-icon:last-child {
     color:#ac2239;
 }
-/* ???: Hide Text of toolbar items? */
+/*  Hide Text of toolbar items */
 .e-grid .e-toolbar .e-tbar-btn-text, 
 .e-grid .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn-text {
     display: none;   

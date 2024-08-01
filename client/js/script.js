@@ -1,10 +1,8 @@
-// TODO: Line 163 display the correct values in the inputfields
-
 // ??? Refresh the Grid after the Sidebar is closed (Use the data from the Grid, no extra API calls) (An edit das Grid übergeben)
 
 // TODO: CTL die das ganze eingabeformular zusammenfasst (Init ruft form auf) divid übergeben (Id in die das ctl geschrieben werden soll)
-// TODO  HTML von div id auf nichts setzen -> 
-// TODO: An Klasse übergeben; Div ID, SIdebar (Element), Grid?, Datarow or null,
+// ???  HTML von div id auf nichts setzen -> 
+// TODO: An Klasse übergeben; Div ID, Sidebar (Element), Grid?, Datarow or null,
 
 // in form()
 //         $(this.divid).html('');
@@ -13,7 +11,7 @@
 //             .then(html => {
 //                 $(this.divid).append(html);
 
-import { createControlls, genders, sidebar, createSidebar } from "./ctl_inputform.js";
+import { genders, showSidebar } from "./ctl_inputform.js";
 ej.base.enableRipple(true);
 export let data, grid;
 let selectedRecord = null;
@@ -162,24 +160,7 @@ export async function init() {
     createGrid();
 }
 
-async function showSidebar(rowData){
-    await loadHTML();
-    createControlls(); 
-    createSidebar();
-    sidebar.show();
-
-    if(rowData){
-        $('#txt_id').val(rowData.id);
-        $('#vorname').val(rowData.vorname).trigger('focus');
-        $('#nachname').val(rowData.nachname).trigger('focus');
-        $('#geburtsdatum').val(rowData.geburtsdatum);
-        $('#geschlecht').val(rowData.geschlecht);
-        $('#qualifiziert').val(rowData.qualifiziert);
-        $('#notiz').val(rowData.notiz).trigger('focus');
-    }
-}
-
-async function loadHTML() {
+export async function loadHTML() {
     $('#sidebar').html("");
     try {
         const response = await $.get('../ctl_inputform.html');

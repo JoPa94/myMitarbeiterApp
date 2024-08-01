@@ -1,6 +1,6 @@
 import { Mitarbeiter } from "./mitarbeiter.js";
-import { grid, getData } from "./script.js";
-let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, formObject;
+import { grid, getData, loadHTML } from "./script.js";
+export let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, formObject;
 
 export let sidebar;
 
@@ -16,11 +16,11 @@ export function createSidebar(){
         showBackdrop: true,
         type: "Push",
         position: 'Right',
-        width: '50%'        //TODO: adjust width
+        width: '60%'
     });
-    sidebar.addEventListener('created', () => {
-        console.log("Sidebar created")
-    });
+    // sidebar.addEventListener('created', () => {
+    //     console.log("Sidebar created")
+    // });
     sidebar.appendTo('#sidebar');
 }
 
@@ -168,4 +168,21 @@ export async function mitarbeiterExists(txt_id) {   //If Mitarbeiter exists 200 
         console.error('Failed to fetch data (Employee may not exist):', error.message);
     }
     return false;
+}
+
+export async function showSidebar(rowData){
+    await loadHTML();
+    createControlls(); 
+    createSidebar();
+    sidebar.show();
+    if(rowData){
+        idTextBox.value = rowData.id;
+        vornameTextBox.value = rowData.vorname
+        nachnameTextBox.value = rowData.nachname
+        datepicker.value = rowData.geburtsdatum
+        const gender = genders.find(g => g.Id === rowData.geschlecht);
+        comboBox.value = gender.Id;
+        checkbox.checked = rowData.qualifiziert
+        notizRte.value = rowData.notiz
+    }
 }
