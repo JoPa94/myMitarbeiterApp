@@ -1,5 +1,5 @@
 import { Mitarbeiter } from "./mitarbeiter.js";
-import { grid, getData, loadHTML } from "./script.js";
+import { grid, getData } from "./script.js";
 export let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, formObject;
 
 export let sidebar;
@@ -10,24 +10,24 @@ export const genders = [
     { Id: 3, Gender: 'Anderes' },
 ];
 
-export function createSidebar(){
-    //sidebar initialization
-    sidebar = new ej.navigations.Sidebar({
-        showBackdrop: true,
-        type: "Push",
-        position: 'Right',
-        width: '60%'
-    });
-    // sidebar.addEventListener('created', () => {
-    //     console.log("Sidebar created")
-    // });
-    sidebar.appendTo('#sidebar');
+export async function createSidebar(rowData) {
+    await loadHTML();
+    createControlls();
+    if (rowData != undefined) {
+        idTextBox.value = rowData.id;
+        vornameTextBox.value = rowData.vorname
+        nachnameTextBox.value = rowData.nachname
+        datepicker.value = rowData.geburtsdatum
+        const gender = genders.find(g => g.Id === rowData.geschlecht);
+        comboBox.value = gender.Id;
+        checkbox.checked = rowData.qualifiziert
+        notizRte.value = rowData.notiz
+    }
 }
 
 export async function createControlls() {
     $('#clear').on('click', clearForm);
     $('#save').on('click', saveData);
-
     // Initialize TextBox elements
     idTextBox = new ej.inputs.TextBox({
         floatLabelType: 'Auto',
@@ -45,7 +45,6 @@ export async function createControlls() {
         floatLabelType: 'Auto',
     });
     nachnameTextBox.appendTo('#nachname');
-
     // Initialize RichTextEditor
     notizRte = new ej.richtexteditor.RichTextEditor({
         placeholder: 'Ihre Notizen hier...',
@@ -57,7 +56,6 @@ export async function createControlls() {
         }
     });
     notizRte.appendTo('#notiz');
-
     // Initialize DatePicker
     datepicker = new ej.calendars.DatePicker({
         placeholder: 'Geburtsdatum',
@@ -66,7 +64,6 @@ export async function createControlls() {
         max: new Date(),
     });
     datepicker.appendTo('#geburtsdatum');
-
     // Initialize ComboBox
     comboBox = new ej.dropdowns.ComboBox({
         placeholder: "Geschlecht",
@@ -77,7 +74,6 @@ export async function createControlls() {
         fields: { text: 'Gender', value: 'Id' },
     });
     comboBox.appendTo('#geschlecht');
-
     // Initialize CheckBox
     checkbox = new ej.buttons.CheckBox({ label: 'Qualifiziert', labelPosition: 'Before' });
     checkbox.appendTo('#qualifiziert');
@@ -89,11 +85,20 @@ export async function createControlls() {
             'geschlecht': { required: true },
         }
     };
+    // Initialize Sidebar
+    sidebar = new ej.navigations.Sidebar({
+        showBackdrop: true,
+        type: "Push",
+        position: 'Right',
+        width: '60%'
+    });
+    // sidebar.addEventListener('created', () => {
+    //     console.log("Sidebar created")
+    // });
+    sidebar.appendTo('#sidebar'); sidebar.show();
     formObject = await new ej.inputs.FormValidator('#myForm', options);
 }
-
 // Button functions
-
 export function clearForm() {
     $('#myForm')[0].reset();
 
@@ -150,7 +155,7 @@ export async function saveData() {
                 console.error('Error creating employee:', error);
             }
         }
-        grid.dataSource = await getData(); // Update the grid data source
+        grid.dataSource = await getData(); // TODO: Update Grid manually
         grid.refresh();
         clearForm();
     }
@@ -170,19 +175,12 @@ export async function mitarbeiterExists(txt_id) {   //If Mitarbeiter exists 200 
     return false;
 }
 
-export async function showSidebar(rowData){
-    await loadHTML();
-    createControlls(); 
-    createSidebar();
-    sidebar.show();
-    if(rowData){
-        idTextBox.value = rowData.id;
-        vornameTextBox.value = rowData.vorname
-        nachnameTextBox.value = rowData.nachname
-        datepicker.value = rowData.geburtsdatum
-        const gender = genders.find(g => g.Id === rowData.geschlecht);
-        comboBox.value = gender.Id;
-        checkbox.checked = rowData.qualifiziert
-        notizRte.value = rowData.notiz
+async function loadHTML() {
+    $('#sidebar').html("");
+    try {
+        const response = await $.get('../ctl_inputform.html');
+        $('#sidebar').append(response);
+    } catch (error) {
+        console.error('Failed to load HTML:', error);
     }
 }

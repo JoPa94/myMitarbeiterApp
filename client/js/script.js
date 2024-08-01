@@ -1,17 +1,13 @@
-// ??? Refresh the Grid after the Sidebar is closed (Use the data from the Grid, no extra API calls) (An edit das Grid übergeben)
+// TODO: Update Grid without api call
+// TODO: Destory sidebar when pulled
+
+// TODO: Sidebar controlls zum überliegendem Element, ctlinput kümmert sich nur um Input und Grid
+// TODO: Use sidebare.close instead of eventhandler
 
 // TODO: CTL die das ganze eingabeformular zusammenfasst (Init ruft form auf) divid übergeben (Id in die das ctl geschrieben werden soll)
-// ???  HTML von div id auf nichts setzen -> 
 // TODO: An Klasse übergeben; Div ID, Sidebar (Element), Grid?, Datarow or null,
 
-// in form()
-//         $(this.divid).html('');
-//         await fetch('/app/myjugendhilfe/ctl/ctl_leistungsnachweis_edit.html')
-//             .then(x => x.text())
-//             .then(html => {
-//                 $(this.divid).append(html);
-
-import { genders, showSidebar } from "./ctl_inputform.js";
+import { createSidebar, genders } from "./ctl_inputform.js";
 ej.base.enableRipple(true);
 export let data, grid;
 let selectedRecord = null;
@@ -122,9 +118,8 @@ async function createGrid() {
         if (args.requestType === 'beginEdit') {
             args.cancel = true;  // Cancel the default editing behavior
             selectedRecord = args.rowData;
-            showSidebar(selectedRecord);
+            await createSidebar(selectedRecord);
         }
-
         if (args.requestType === 'delete') {
             selectedRecord = args.data[0];
             await deleteMitarbeiter(selectedRecord.id);
@@ -132,7 +127,7 @@ async function createGrid() {
         }
         if (args.requestType === 'add') {
             args.cancel = true;     // Cancel the default add behavior
-            await showSidebar()
+            await createSidebar()
         }
     });
     let toolbar = grid.element.querySelector('.e-toolbar');
@@ -155,19 +150,14 @@ async function deleteMitarbeiter(id) {
         console.error('Error updating employee:', error);
     }
 }
+
 export async function init() {
     await loadLocales();
     createGrid();
 }
 
-export async function loadHTML() {
-    $('#sidebar').html("");
-    try {
-        const response = await $.get('../ctl_inputform.html');
-        $('#sidebar').append(response);
-    } catch (error) {
-        console.error('Failed to load HTML:', error);
-    }
-}
+// Stringbuilder
 
-// Neues JS file für ctl_input Klasse erstellen div id übergeben die in Klasse soll (sidebar) klasse erstellt das HTML und zeigt es an ...
+// 1. Speicherbutton der den String builden (Einen String mit Kreuzen speichern)
+// 2. Drag and Drop (Finde heraus wie)
+// 3. ggf. Design überarbeitern
