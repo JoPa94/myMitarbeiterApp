@@ -31,42 +31,49 @@ export class StringbuilderFormatDto {
     }
 }
 
+
+// Stringbuilder
+
+// 1. Speicherbutton der den String builden (Einen String mit Kreuzen speichern)
+// 2. Drag and Drop (Finde heraus wie)
+// 3. ggf. Design überarbeitern
+
 // Stringbuilder Example
 
-export class StringbuilderDto {
-    constructor(values) {
-        let defaults = $.extend({}, {
-            id: 0,
-            parent: 0,
-            parentKey: 0,
-            type: null,
-            builder: '',
-            erstelltAm: new Date(),
-            erstelltVon: '',
-            erstelltSid: 0,
-            stringbuilderFormats: []
-        }, values);
+// export class StringbuilderDto {
+//     constructor(values) {
+//         let defaults = $.extend({}, {
+//             id: 0,
+//             parent: 0,
+//             parentKey: 0,
+//             type: null,
+//             builder: '',
+//             erstelltAm: new Date(),
+//             erstelltVon: '',
+//             erstelltSid: 0,
+//             stringbuilderFormats: []
+//         }, values);
 
-        this.id = defaults.id;
-        this.parent = defaults.parent;
-        this.parentKey = defaults.parentKey;
-        this.type = defaults.type;
-        this.builder = defaults.builder;
-        this.erstelltAm = new Date(defaults.erstelltAm);
-        this.erstelltVon = defaults.erstelltVon;
-        this.erstelltSid = defaults.erstelltSid;
-        this.stringbuilderFormats = defaults.stringbuilderFormats;
-    }
-}
+//         this.id = defaults.id;
+//         this.parent = defaults.parent;
+//         this.parentKey = defaults.parentKey;
+//         this.type = defaults.type;
+//         this.builder = defaults.builder;
+//         this.erstelltAm = new Date(defaults.erstelltAm);
+//         this.erstelltVon = defaults.erstelltVon;
+//         this.erstelltSid = defaults.erstelltSid;
+//         this.stringbuilderFormats = defaults.stringbuilderFormats;
+//     }
+// }
 
-export function getExampleBuilder() {
-    return new StringbuilderDto({
-        id: 1,
-        parent: 31,
-        parentKey: 0,
-        type: 10101,
-        builder: '†⸸23.Nachname⸸†, †⸸23.Geburtsdatum⸸† †⸸30.Name⸸†', //†⸸23.Nachname⸸†, †⸸23.Vorname⸸† †⸸30.Name⸸†
-        erstelltAm: new Date(),
-        stringbuilderFormats: [{id: 1, stringbuilderId: 1, field: '23.Geburtsdatum', format: 'dd.MM.yyyy'}]
-    });
-}
+// export function getExampleBuilder() {
+//     return new StringbuilderDto({
+//         id: 1,
+//         parent: 31,
+//         parentKey: 0,
+//         type: 10101,
+//         builder: '†⸸23.Nachname⸸†, †⸸23.Geburtsdatum⸸† †⸸30.Name⸸†', //†⸸23.Nachname⸸†, †⸸23.Vorname⸸† †⸸30.Name⸸†
+//         erstelltAm: new Date(),
+//         stringbuilderFormats: [{id: 1, stringbuilderId: 1, field: '23.Geburtsdatum', format: 'dd.MM.yyyy'}]
+//     });
+// }

@@ -25,7 +25,6 @@ namespace WebApplication1.Services
         }
         public async Task<Mitarbeiter?> GetByID(int id)
         {
-            Console.WriteLine("HEREHREHEREHEHR");
             var mitarbeiter = await _context.Mitarbeiter.FindAsync(id);
             Console.WriteLine(mitarbeiter);
             return mitarbeiter;

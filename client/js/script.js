@@ -155,9 +155,3 @@ export async function init() {
     await loadLocales();
     createGrid();
 }
-
-// Stringbuilder
-
-// 1. Speicherbutton der den String builden (Einen String mit Kreuzen speichern)
-// 2. Drag and Drop (Finde heraus wie)
-// 3. ggf. Design überarbeitern

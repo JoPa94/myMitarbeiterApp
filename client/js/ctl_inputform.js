@@ -90,31 +90,23 @@ export async function createControlls() {
         showBackdrop: true,
         type: "Push",
         position: 'Right',
+        // enableGestures: false,
         width: '60%'
     });
-    // sidebar.addEventListener('created', () => {
-    //     console.log("Sidebar created")
-    // });
+    sidebar.addEventListener('change', () => {
+        if(!sidebar.isOpen){
+            $('#sidebar').html("");
+            sidebar.destroy();
+            console.log("Sidebar destroyed")
+        }
+    });
     sidebar.appendTo('#sidebar'); sidebar.show();
+
     formObject = await new ej.inputs.FormValidator('#myForm', options);
 }
 // Button functions
 export function clearForm() {
     $('#myForm')[0].reset();
-
-    sidebar.addEventListener('destroyed', () => {
-        console.log("Sidebar destroyed")
-    });
-
-    sidebar.addEventListener('close', () => {
-        console.log("Sidebar closed")
-    });
-
-    sidebar.addEventListener('change', () => {
-        console.log("Sidebar changed")
-        $('#sidebar').html("");
-        sidebar.destroy();
-    });
     sidebar.hide();
 }
 
