@@ -1,8 +1,6 @@
 import { Mitarbeiter } from "./mitarbeiter.js";
-import { grid, getData } from "./script.js";
-export let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, formObject;
-
-export let sidebar;
+import { grid, data } from "./script.js";
+export let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, formObject, sidebar;
 
 export const genders = [
     { Id: 1, Gender: 'Männlich' },
@@ -14,6 +12,7 @@ export async function createSidebar(rowData) {
     await loadHTML();
     createControlls();
     if (rowData != undefined) {
+        console.log("id is " + rowData.id)
         idTextBox.value = rowData.id;
         vornameTextBox.value = rowData.vorname
         nachnameTextBox.value = rowData.nachname
@@ -94,7 +93,7 @@ export async function createControlls() {
         width: '60%'
     });
     sidebar.addEventListener('change', () => {
-        if(!sidebar.isOpen){
+        if (!sidebar.isOpen) {
             $('#sidebar').html("");
             sidebar.destroy();
             console.log("Sidebar destroyed")
@@ -130,6 +129,15 @@ export async function saveData() {
             } catch (error) {
                 console.error('Error updating employee:', error);
             }
+            const updatedEmployee = data.find(item => item.id === mitarbeiter.id);
+            if (updatedEmployee) {
+                updatedEmployee.vorname = mitarbeiter.vorname;
+                updatedEmployee.nachname = mitarbeiter.nachname;
+                updatedEmployee.geburtsdatum = mitarbeiter.geburtsdatum;
+                updatedEmployee.geschlecht = mitarbeiter.geschlecht;
+                updatedEmployee.qualifiziert = mitarbeiter.qualifiziert;
+                updatedEmployee.notiz = mitarbeiter.notiz;
+            }
         } else {    // CREATE
             try {
                 const response = await fetch("https://localhost:7155/Mitarbeiter", {
@@ -143,11 +151,13 @@ export async function saveData() {
                 if (!response.ok) {
                     throw new Error(`Error creating employee: ${response.status}`);
                 }
+                data.push(await response.json());
+
             } catch (error) {
                 console.error('Error creating employee:', error);
             }
+            console.log("ENDE FETCH")
         }
-        grid.dataSource = await getData(); // TODO: Update Grid manually
         grid.refresh();
         clearForm();
     }

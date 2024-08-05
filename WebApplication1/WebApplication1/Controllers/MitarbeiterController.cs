@@ -47,20 +47,6 @@ namespace WebApplication1.Controllers
         {
             _logger.LogInformation("Create method called with Id: {mitarbeiterId}", mitarbeiter.Id);
 
-            //var createdMitarbeiter = await _mitarbeiterService.Create(mitarbeiter);
-
-            //return await _mitarbeiterService.Create(mitarbeiter) != null ?
-            //                                 Ok(mitarbeiter) :
-            //                                 BadRequest(new { title = "Bad Request", status = 400, message = $"Error occurred while creating Mitarbeiter with ID: {mitarbeiter.Id}." });
-
-
-
-            //if (createdMitarbeiter == null)
-            //{
-            //    return BadRequest(new { title = "Bad Request", status = 400, message = $"Error occurred while creating Mitarbeiter with ID: {mitarbeiter.Id}." });
-            //}
-            //return CreatedAtAction(nameof(GetById), new { id = mitarbeiter.Id }, mitarbeiter);
-
             return await _mitarbeiterService.Create(mitarbeiter) != null ? CreatedAtAction(nameof(GetById), new { id = mitarbeiter.Id }, mitarbeiter) : BadRequest();
         }
 

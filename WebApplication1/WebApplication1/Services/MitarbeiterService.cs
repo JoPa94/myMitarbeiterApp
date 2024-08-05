@@ -35,7 +35,6 @@ namespace WebApplication1.Services
             if (mitarbeiter != null)
             {
                 await _context.Mitarbeiter.AddAsync(mitarbeiter);
-
                 return await _context.SaveChangesAsync() > 0 ? mitarbeiter : null;
             }
             return null;

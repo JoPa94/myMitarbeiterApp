@@ -1,11 +1,8 @@
-// TODO: Update Grid without api call
-// TODO: Destory sidebar when pulled
-
 // TODO: Sidebar controlls zum überliegendem Element, ctlinput kümmert sich nur um Input und Grid
 // TODO: Use sidebare.close instead of eventhandler
 
 // TODO: CTL die das ganze eingabeformular zusammenfasst (Init ruft form auf) divid übergeben (Id in die das ctl geschrieben werden soll)
-// TODO: An Klasse übergeben; Div ID, Sidebar (Element), Grid?, Datarow or null,
+// TODO: An Klasse übergeben; Div ID, Sidebar (Element), Grid?, Datarow or null (Wenn datarow dann in felder einfügen, ansonßten leere felder),
 
 import { createSidebar, genders } from "./ctl_inputform.js";
 ej.base.enableRipple(true);

@@ -1,3 +1,5 @@
+import  {grid} from "./script";
+
 export class cls_inputform{
     constructor( sidebar, divid, grid, datarow){
 
@@ -11,25 +13,27 @@ export class cls_inputform{
         this.checkbox.destory()
         // Nur elemente in der Sidebar destoryen (Nicht die Sidebar)
     }
+
+    
 }
 
 // außerhalb der Klasse das Sidebar closevent erstellen 
 
-export class StringbuilderFormatDto {
-    constructor(values) {
-        let defaults = $.extend({}, {
-            id: 0,
-            stringbuilderId: 0,
-            field: '',
-            format: '',
-        }, values);
+// export class StringbuilderFormatDto {
+//     constructor(values) {
+//         let defaults = $.extend({}, {
+//             id: 0,
+//             stringbuilderId: 0,
+//             field: '',
+//             format: '',
+//         }, values);
 
-        this.id = defaults.id;
-        this.stringbuilderId = defaults.stringbuilderId;
-        this.field = defaults.field;
-        this.format = defaults.format;
-    }
-}
+//         this.id = defaults.id;
+//         this.stringbuilderId = defaults.stringbuilderId;
+//         this.field = defaults.field;
+//         this.format = defaults.format;
+//     }
+// }
 
 
 // Stringbuilder
