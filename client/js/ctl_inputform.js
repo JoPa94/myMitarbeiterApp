@@ -8,181 +8,179 @@ export const genders = [
     { Id: 3, Gender: 'Anderes' },
 ];
 
-export async function createSidebar(rowData) {
-    await loadHTML();
-    createControlls();
-    if (rowData != undefined) {
-        console.log("id is " + rowData.id)
-        idTextBox.value = rowData.id;
-        vornameTextBox.value = rowData.vorname
-        nachnameTextBox.value = rowData.nachname
-        datepicker.value = rowData.geburtsdatum
-        const gender = genders.find(g => g.Id === rowData.geschlecht);
-        comboBox.value = gender.Id;
-        checkbox.checked = rowData.qualifiziert
-        notizRte.value = rowData.notiz
-    }
-}
+// export async function createSidebar(rowData) {
+//     await loadHTML();
+//     createControlls();
+//     if (rowData != undefined) {
+//         idTextBox.value = rowData.id;
+//         vornameTextBox.value = rowData.vorname
+//         nachnameTextBox.value = rowData.nachname
+//         datepicker.value = rowData.geburtsdatum
+//         const gender = genders.find(g => g.Id === rowData.geschlecht);
+//         comboBox.value = gender.Id;
+//         checkbox.checked = rowData.qualifiziert
+//         notizRte.value = rowData.notiz
+//     }
+// }
 
-export async function createControlls() {
-    $('#clear').on('click', clearForm);
-    $('#save').on('click', saveData);
-    // Initialize TextBox elements
-    idTextBox = new ej.inputs.TextBox({
-        floatLabelType: 'Auto',
-    });
-    idTextBox.appendTo('#txt_id');
+// export async function createControlls() {
+//     $('#clear').on('click', clearForm);
+//     $('#save').on('click', saveData);
+//     // Initialize TextBox elements
+//     idTextBox = new ej.inputs.TextBox({
+//         floatLabelType: 'Auto',
+//     });
+//     idTextBox.appendTo('#txt_id');
 
-    vornameTextBox = new ej.inputs.TextBox({
-        placeholder: 'Vorname',
-        floatLabelType: 'Auto',
-    });
-    vornameTextBox.appendTo('#vorname');
+//     vornameTextBox = new ej.inputs.TextBox({
+//         placeholder: 'Vorname',
+//         floatLabelType: 'Auto',
+//     });
+//     vornameTextBox.appendTo('#vorname');
 
-    nachnameTextBox = new ej.inputs.TextBox({
-        placeholder: 'Nachname',
-        floatLabelType: 'Auto',
-    });
-    nachnameTextBox.appendTo('#nachname');
-    // Initialize RichTextEditor
-    notizRte = new ej.richtexteditor.RichTextEditor({
-        placeholder: 'Ihre Notizen hier...',
-        height: 180,
-        maxLength: 200,
-        inlineMode: {
-            enable: true,
-            onSelection: true
-        }
-    });
-    notizRte.appendTo('#notiz');
-    // Initialize DatePicker
-    datepicker = new ej.calendars.DatePicker({
-        placeholder: 'Geburtsdatum',
-        enableMask: true,
-        format: 'dd/MM/yyyy',
-        max: new Date(),
-    });
-    datepicker.appendTo('#geburtsdatum');
-    // Initialize ComboBox
-    comboBox = new ej.dropdowns.ComboBox({
-        placeholder: "Geschlecht",
-        allowCustom: false,
-        autofill: true,
-        locale: 'de',
-        dataSource: genders,
-        fields: { text: 'Gender', value: 'Id' },
-    });
-    comboBox.appendTo('#geschlecht');
-    // Initialize CheckBox
-    checkbox = new ej.buttons.CheckBox({ label: 'Qualifiziert', labelPosition: 'Before' });
-    checkbox.appendTo('#qualifiziert');
-    let options = {
-        rules: {
-            'vorname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
-            'nachname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
-            'geburtsdatum': { required: true },
-            'geschlecht': { required: true },
-        }
-    };
-    // Initialize Sidebar
-    sidebar = new ej.navigations.Sidebar({
-        showBackdrop: true,
-        type: "Push",
-        position: 'Right',
-        // enableGestures: false,
-        width: '60%'
-    });
-    sidebar.addEventListener('change', () => {
-        if (!sidebar.isOpen) {
-            $('#sidebar').html("");
-            sidebar.destroy();
-            console.log("Sidebar destroyed")
-        }
-    });
-    sidebar.appendTo('#sidebar'); sidebar.show();
+//     nachnameTextBox = new ej.inputs.TextBox({
+//         placeholder: 'Nachname',
+//         floatLabelType: 'Auto',
+//     });
+//     nachnameTextBox.appendTo('#nachname');
+//     // Initialize RichTextEditor
+//     notizRte = new ej.richtexteditor.RichTextEditor({
+//         placeholder: 'Ihre Notizen hier...',
+//         height: 180,
+//         maxLength: 200,
+//         inlineMode: {
+//             enable: true,
+//             onSelection: true
+//         }
+//     });
+//     notizRte.appendTo('#notiz');
+//     // Initialize DatePicker
+//     datepicker = new ej.calendars.DatePicker({
+//         placeholder: 'Geburtsdatum',
+//         enableMask: true,
+//         format: 'dd/MM/yyyy',
+//         max: new Date(),
+//     });
+//     datepicker.appendTo('#geburtsdatum');
+//     // Initialize ComboBox
+//     comboBox = new ej.dropdowns.ComboBox({
+//         placeholder: "Geschlecht",
+//         allowCustom: false,
+//         autofill: true,
+//         locale: 'de',
+//         dataSource: genders,
+//         fields: { text: 'Gender', value: 'Id' },
+//     });
+//     comboBox.appendTo('#geschlecht');
+//     // Initialize CheckBox
+//     checkbox = new ej.buttons.CheckBox({ label: 'Qualifiziert', labelPosition: 'Before' });
+//     checkbox.appendTo('#qualifiziert');
+//     let options = {
+//         rules: {
+//             'vorname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
+//             'nachname': { required: true, regex: '^[a-zA-Z\\s-]+$' },
+//             'geburtsdatum': { required: true },
+//             'geschlecht': { required: true },
+//         }
+//     };
+//     // Initialize Sidebar
+//     sidebar = new ej.navigations.Sidebar({
+//         showBackdrop: true,
+//         type: "Push",
+//         position: 'Right',
+//         width: '60%'
+//     });
+//     sidebar.addEventListener('change', () => {
+//         if (!sidebar.isOpen) {
+//             $('#sidebar').html("");
+//             sidebar.destroy();
+//             console.log("Sidebar destroyed")
+//         }
+//     });
+//     sidebar.appendTo('#sidebar');
+//     sidebar.show();
 
-    formObject = await new ej.inputs.FormValidator('#myForm', options);
-}
+//     formObject = await new ej.inputs.FormValidator('#myForm', options);
+// }
 // Button functions
-export function clearForm() {
-    $('#myForm')[0].reset();
-    sidebar.hide();
-}
+// export function clearForm() {
+//     $('#myForm')[0].reset();
+//     sidebar.hide();
+// }
 
-export async function saveData() {
-    if (formObject.validate()) {
-        let exists = await mitarbeiterExists(parseInt(idTextBox.value));
-        let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
-        if (exists) {
-            try {   // UPDATE
-                const response = await fetch(`https://localhost:7155/Mitarbeiter`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(mitarbeiter)
-                });
+// export async function saveData() {
+//     if (formObject.validate()) {
+//         let exists = await mitarbeiterExists(parseInt(idTextBox.value));
+//         let mitarbeiter = new Mitarbeiter(parseInt(idTextBox.value), vornameTextBox.value, nachnameTextBox.value, datepicker.value, parseInt(comboBox.value), checkbox.checked, notizRte.getText());
+//         if (exists) {
+//             try {   // UPDATE
+//                 const response = await fetch(`https://localhost:7155/Mitarbeiter`, {
+//                     method: 'PUT',
+//                     headers: {
+//                         'Content-Type': 'application/json'
+//                     },
+//                     body: JSON.stringify(mitarbeiter)
+//                 });
 
-                if (!response.ok) {
-                    throw new Error(`Error updating employee: ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error updating employee:', error);
-            }
-            const updatedEmployee = data.find(item => item.id === mitarbeiter.id);
-            if (updatedEmployee) {
-                updatedEmployee.vorname = mitarbeiter.vorname;
-                updatedEmployee.nachname = mitarbeiter.nachname;
-                updatedEmployee.geburtsdatum = mitarbeiter.geburtsdatum;
-                updatedEmployee.geschlecht = mitarbeiter.geschlecht;
-                updatedEmployee.qualifiziert = mitarbeiter.qualifiziert;
-                updatedEmployee.notiz = mitarbeiter.notiz;
-            }
-        } else {    // CREATE
-            try {
-                const response = await fetch("https://localhost:7155/Mitarbeiter", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(mitarbeiter)
-                });
+//                 if (!response.ok) {
+//                     throw new Error(`Error updating employee: ${response.status}`);
+//                 }
+//             } catch (error) {
+//                 console.error('Error updating employee:', error);
+//             }
+//             const updatedEmployee = data.find(item => item.id === mitarbeiter.id);
+//             if (updatedEmployee) {
+//                 updatedEmployee.vorname = mitarbeiter.vorname;
+//                 updatedEmployee.nachname = mitarbeiter.nachname;
+//                 updatedEmployee.geburtsdatum = mitarbeiter.geburtsdatum;
+//                 updatedEmployee.geschlecht = mitarbeiter.geschlecht;
+//                 updatedEmployee.qualifiziert = mitarbeiter.qualifiziert;
+//                 updatedEmployee.notiz = mitarbeiter.notiz;
+//             }
+//         } else {    // CREATE
+//             try {
+//                 const response = await fetch("https://localhost:7155/Mitarbeiter", {
+//                     method: 'POST',
+//                     headers: {
+//                         'Content-Type': 'application/json'
+//                     },
+//                     body: JSON.stringify(mitarbeiter)
+//                 });
 
-                if (!response.ok) {
-                    throw new Error(`Error creating employee: ${response.status}`);
-                }
-                data.push(await response.json());
+//                 if (!response.ok) {
+//                     throw new Error(`Error creating employee: ${response.status}`);
+//                 }
+//                 data.push(await response.json());
 
-            } catch (error) {
-                console.error('Error creating employee:', error);
-            }
-            console.log("ENDE FETCH")
-        }
-        grid.refresh();
-        clearForm();
-    }
-}
+//             } catch (error) {
+//                 console.error('Error creating employee:', error);
+//             }
+//         }
+//         grid.refresh();
+//         clearForm();
+//     }
+// }
 
-export async function mitarbeiterExists(txt_id) {   //If Mitarbeiter exists 200 will be returned, if not 204 (Not content) is returned
-    const url = `https://localhost:7155/Mitarbeiter/${txt_id}`;
-    try {
-        const response = await fetch(url);
-        if (response.status != 204) {
-            return true;
-        }
+// export async function mitarbeiterExists(txt_id) {   //If Mitarbeiter exists 200 will be returned, if not 204 (Not content) is returned
+//     const url = `https://localhost:7155/Mitarbeiter/${txt_id}`;
+//     try {
+//         const response = await fetch(url);
+//         if (response.status != 204) {
+//             return true;
+//         }
 
-    } catch (error) {
-        console.error('Failed to fetch data (Employee may not exist):', error.message);
-    }
-    return false;
-}
+//     } catch (error) {
+//         console.error('Failed to fetch data (Employee may not exist):', error.message);
+//     }
+//     return false;
+// }
 
-async function loadHTML() {
-    $('#sidebar').html("");
-    try {
-        const response = await $.get('../ctl_inputform.html');
-        $('#sidebar').append(response);
-    } catch (error) {
-        console.error('Failed to load HTML:', error);
-    }
-}
+// async function loadHTML() {
+//     $('#sidebar').html("");
+//     try {
+//         const response = await $.get('../ctl_inputform.html');
+//         $('#sidebar').append(response);
+//     } catch (error) {
+//         console.error('Failed to load HTML:', error);
+//     }
+// }

@@ -1,10 +1,5 @@
-// TODO: Sidebar controlls zum überliegendem Element, ctlinput kümmert sich nur um Input und Grid
-// TODO: Use sidebare.close instead of eventhandler
-
-// TODO: CTL die das ganze eingabeformular zusammenfasst (Init ruft form auf) divid übergeben (Id in die das ctl geschrieben werden soll)
-// TODO: An Klasse übergeben; Div ID, Sidebar (Element), Grid?, Datarow or null (Wenn datarow dann in felder einfügen, ansonßten leere felder),
-
-import { createSidebar, genders } from "./ctl_inputform.js";
+import { cls_inputform } from "./cls_inputform.js";
+import { genders } from "./ctl_inputform.js";
 ej.base.enableRipple(true);
 export let data, grid;
 let selectedRecord = null;
@@ -13,7 +8,6 @@ $(document).ready((args) => {
     init();
 });
 
-// functions
 async function loadLocales() {
     var calendarData, currenciesData, numberSystemData, numbersData, timeZoneNamesData;
     ej.base.L10n.load({
@@ -115,7 +109,8 @@ async function createGrid() {
         if (args.requestType === 'beginEdit') {
             args.cancel = true;  // Cancel the default editing behavior
             selectedRecord = args.rowData;
-            await createSidebar(selectedRecord);
+            // await createSidebar(selectedRecord);
+            const inputForm = new cls_inputform(data, grid, args.rowData, genders);
         }
         if (args.requestType === 'delete') {
             selectedRecord = args.data[0];
@@ -124,7 +119,7 @@ async function createGrid() {
         }
         if (args.requestType === 'add') {
             args.cancel = true;     // Cancel the default add behavior
-            await createSidebar()
+            const inputForm = new cls_inputform(data, grid, null, genders);
         }
     });
     let toolbar = grid.element.querySelector('.e-toolbar');
