@@ -1,4 +1,4 @@
-import { createControls, createGrid } from "./ctl_inputform.js";
+import { ctl_inputform} from "./ctl_inputform.js";
 
 export class cls_inputform {
     constructor(gridId) {
@@ -20,8 +20,8 @@ export class cls_inputform {
     }
 
     async init() {
-        await createGrid();
-        createControls();
+        const inputform = new ctl_inputform(this.gridId);
+        inputform.createControls();
     }
 }
 

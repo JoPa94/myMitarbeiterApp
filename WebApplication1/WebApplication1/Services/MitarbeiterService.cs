@@ -44,7 +44,7 @@ namespace WebApplication1.Services
         {
             try
             {
-                if (mitarbeiter.Id == 0)    // TODO: Check db
+                if (mitarbeiter.Id == 0)    // TODO IP: Check db
                 {
                     return null;
                 }

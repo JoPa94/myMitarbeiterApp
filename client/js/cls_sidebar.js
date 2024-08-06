@@ -1,9 +1,3 @@
-import { createControls, populateData } from "./ctl_inputform.js";
-// TODO: CTL die das ganze eingabeformular zusammenfasst (Init ruft form auf) divid übergeben (Id in die das ctl geschrieben werden soll)
-// TODO: Sidebar controlls zum überliegendem Element, ctlinput kümmert sich nur um Input und Grid
-
-// ???: An Klasse übergeben; Div ID, Sidebar (Element), Grid, Datarow
-
 export class cls_sidebar {
     constructor(sidebarId, datarow, inputForm) {
         this.sidebarId = sidebarId;
@@ -14,8 +8,8 @@ export class cls_sidebar {
 
     sidebarInit() {
         this.form().then(() => {
-            createControls(this.inputForm);
-            populateData(this.datarow);
+            this.inputForm.createControls();
+            this.inputForm.populateData(this.datarow);
             this.createSidebar();
         });
     }
@@ -42,15 +36,11 @@ export class cls_sidebar {
         this.sidebar.show();
     }
 
-    destroy() {
-        $(this.sidebarId).html("");
-        this.sidebar.destroy();
-        console.log("Sidebar and controls destroyed");
-    }
-    
-    sidebar() {
-        this.sidebar.close = () => {
-            destory()
-        }
+    async destroy() {
+        setTimeout(() => {              //???: Besserer weg als timeout?
+            $(this.sidebarId).html("");
+            this.sidebar.destroy();
+            console.log("Sidebar and controls destroyed");
+        }, 1000)
     }
 }
