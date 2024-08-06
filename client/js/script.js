@@ -1,5 +1,7 @@
-import {   createGrid } from "./ctl_inputform.js";
+import { cls_inputform } from "./cls_inputform.js";
+
 ej.base.enableRipple(true);
+let gridId = '#Grid';
 
 $(document).ready((args) => {
     init();
@@ -86,6 +88,6 @@ export async function deleteMitarbeiter(id) {
 
 export async function init() {
     await loadLocales();
-    await createGrid();
-    // new cls_inputform();
+    // await createGrid();
+    new cls_inputform(gridId);
 }
