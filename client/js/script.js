@@ -1,12 +1,15 @@
-import { cls_inputform } from "./cls_inputform.js";
-import { genders } from "./ctl_inputform.js";
+import {   createGrid } from "./ctl_inputform.js";
 ej.base.enableRipple(true);
-export let data, grid;
-let selectedRecord = null;
 
 $(document).ready((args) => {
     init();
 });
+
+export const genders = [
+    { Id: 1, Gender: 'Männlich' },
+    { Id: 2, Gender: 'Weiblich' },
+    { Id: 3, Gender: 'Anderes' },
+];
 
 async function loadLocales() {
     var calendarData, currenciesData, numberSystemData, numbersData, timeZoneNamesData;
@@ -64,69 +67,7 @@ export async function getData() {
     return [];
 }
 
-async function createGrid() {
-    data = await getData();
-    data = data.map(x => {
-        x.geburtsdatum = new Date(x.geburtsdatum)
-        return x;
-    });
-    grid = new ej.grids.Grid({
-        dataSource: data,
-        toolbar: ['Delete', 'Edit', 'Add'],
-        editSettings: { allowEditing: true, allowDeleting: true, allowAdding: true},
-        columns: [
-            { field: 'id', headerText: 'ID', width: 60, type: 'number', isPrimaryKey: true, visible: false },
-            { field: 'vorname', headerText: 'Vorname', width: 140, type: 'string', textAlign: 'Center', validationRules: { required: true } },
-            { field: 'nachname', headerText: 'Nachname', width: 140, type: 'string', textAlign: 'Center', validationRules: { required: true } },
-            {
-                field: 'geburtsdatum', headerText: 'Geburtsdatum', width: 100, format: { type: 'date', format: 'dd/MM/yyyy' }, textAlign: 'Center', validationRules: { required: true }, edit: {
-                    params: {
-                        format: 'dd/MM/yyyy',
-                        max: new Date(),
-                        min: new Date(1, 1, 1900)
-                    }
-                }
-            },
-            {
-                field: 'geschlecht',
-                headerText: 'Geschlecht',
-                width: 100,
-                textAlign: 'center',
-                foreignKeyField: 'Id',
-                dataSource: genders,
-                foreignKeyValue: 'Gender',
-            },
-            { headerText: 'Qualifiziert', width: 100, textAlign: 'Center', template: '#qualifiziertCheckbox' },
-            { field: 'notiz', headerText: 'Notiz', width: 140, type: 'string' }
-        ],
-        allowPaging: true,
-        pageSettings: { currentPage: 1, pageSize: 10, pageCount: 5, pageSizes: true },
-    });
-    grid.appendTo('#Grid');
-
-    // Event listener for beginEdit
-    grid.addEventListener('actionBegin', async function (args) {
-        if (args.requestType === 'beginEdit') {
-            args.cancel = true;  // Cancel the default editing behavior
-            selectedRecord = args.rowData;
-            // await createSidebar(selectedRecord);
-            const inputForm = new cls_inputform(data, grid, args.rowData, genders);
-        }
-        if (args.requestType === 'delete') {
-            selectedRecord = args.data[0];
-            await deleteMitarbeiter(selectedRecord.id);
-            grid.refresh();
-        }
-        if (args.requestType === 'add') {
-            args.cancel = true;     // Cancel the default add behavior
-            const inputForm = new cls_inputform(data, grid, null, genders);
-        }
-    });
-    let toolbar = grid.element.querySelector('.e-toolbar');
-    grid.element.appendChild(toolbar);
-}
-
-async function deleteMitarbeiter(id) {
+export async function deleteMitarbeiter(id) {
     try {
         const response = await fetch(`https://localhost:7155/Mitarbeiter/${id}`, {
             method: 'DELETE',
@@ -145,5 +86,6 @@ async function deleteMitarbeiter(id) {
 
 export async function init() {
     await loadLocales();
-    createGrid();
+    await createGrid();
+    // new cls_inputform();
 }
