@@ -18,20 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 307,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MitarbeiterController.cs",
-              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Controllers\\MitarbeiterController.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\MitarbeiterController.cs",
-              "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Controllers\\MitarbeiterController.cs",
-              "RelativeToolTip": "WebApplication1\\Controllers\\MitarbeiterController.cs",
-              "ViewState": "AQIAACIAAAAAAAAAAAAqwCwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-05T06:45:26.443Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -40,9 +28,22 @@
               "RelativeDocumentMoniker": "WebApplication1\\Services\\MitarbeiterService.cs",
               "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Services\\MitarbeiterService.cs",
               "RelativeToolTip": "WebApplication1\\Services\\MitarbeiterService.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAjwBwAAAAMAAAA",
+              "ViewState": "AQIAABQAAAAAAAAAAAAjwBcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-30T10:35:26.909Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MitarbeiterController.cs",
+              "DocumentMoniker": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Controllers\\MitarbeiterController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\MitarbeiterController.cs",
+              "ToolTip": "C:\\Users\\ioanis.palaskas\\Desktop\\myMitarbeiterApp\\WebApplication1\\WebApplication1\\Controllers\\MitarbeiterController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\MitarbeiterController.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAAAmwBsAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T06:45:26.443Z",
               "EditorCaption": ""
             }
           ]

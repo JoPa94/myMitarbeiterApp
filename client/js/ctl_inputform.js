@@ -1,7 +1,7 @@
 import { getData, deleteMitarbeiter, genders } from "./script.js";
 import { cls_sidebar } from "./cls_sidebar.js";
 import { Mitarbeiter } from "./mitarbeiter.js";
-export let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, formObject, data, grid;
+export let idTextBox, vornameTextBox, nachnameTextBox, notizRte, datepicker, comboBox, checkbox, formObject, data, grid, sidebarObj;
 let selectedRecord = null;
 
 export async function createGrid() {
@@ -50,7 +50,7 @@ export async function createGrid() {
             args.cancel = true;  // Cancel the default editing behavior
             selectedRecord = args.rowData;
             // await createSidebar(selectedRecord);
-            let sidebarObj = new cls_sidebar('#sidebar', args.rowData);
+            sidebarObj = new cls_sidebar('#sidebar', args.rowData);
         }
         if (args.requestType === 'delete') {
             selectedRecord = args.data[0];
@@ -60,7 +60,7 @@ export async function createGrid() {
 
         if (args.requestType === 'add') {
             args.cancel = true;     // Cancel the default add behavior
-            let sidebarObj = new cls_sidebar('#sidebar', null);
+            sidebarObj = new cls_sidebar('#sidebar', null);
         }
     });
     let toolbar = grid.element.querySelector('.e-toolbar');
@@ -205,10 +205,7 @@ async function mitarbeiterExists(txt_id) {
     return false;
 }
 
-// function clearForm() {
-//     $('#myForm')[0].reset();
-//     sidebarObj.destroy();
-// }
-
-
-
+function clearForm() {
+    $('#myForm')[0].reset();
+    sidebarObj.destroy();
+}

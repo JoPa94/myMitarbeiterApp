@@ -88,6 +88,5 @@ export async function deleteMitarbeiter(id) {
 
 export async function init() {
     await loadLocales();
-    // await createGrid();
     new cls_inputform(gridId);
 }
